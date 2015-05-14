@@ -2,28 +2,30 @@
 
 use Bleicker\Registry\Registry;
 
+/** Setup Root Path */
+Registry::set('paths.root', realpath(__DIR__ . '/../../../'));
+
 /** Doctrine Database Settings */
-Registry::set('doctrine.db.default.driver', 'pdo_sqlite');
-Registry::set('doctrine.db.default.path', __DIR__ . '/../../../.resources/persistence/db.sqlite');
+Registry::set('doctrine.db.default.url', 'sqlite://' . Registry::get('paths.root') . '.resources/persistence/db.sqlite');
 
 /** Doctrine Schemas */
-Registry::set('paths.doctrine.schema.nodes', __DIR__ . "/../../../vendor/bleicker/nodes/src/Schema/Persistence");
-Registry::set('paths.doctrine.schema.nodestypes', __DIR__ . "/../../../vendor/bleicker/nodetypes/src/Schema/Persistence");
-Registry::set('paths.doctrine.schema.account', __DIR__ . "/../../../vendor/bleicker/account/src/Schema/Persistence");
+Registry::set('paths.doctrine.schema.nodes', Registry::get('paths.root') . '/vendor/bleicker/nodes/src/Schema/Persistence');
+Registry::set('paths.doctrine.schema.nodestypes', Registry::get('paths.root') . '/vendor/bleicker/nodetypes/src/Schema/Persistence');
+Registry::set('paths.doctrine.schema.account', Registry::get('paths.root') . '/vendor/bleicker/account/src/Schema/Persistence');
 
 /** Fluid Paths */
-Registry::set('paths.typo3.fluid.templateRootPaths.cms', __DIR__ . '/../../Private/Templates/');
-Registry::set('paths.typo3.fluid.layoutRootPaths.cms', __DIR__ . '/../../Private/Layouts/');
-Registry::set('paths.typo3.fluid.partialRootPaths.cms', __DIR__ . '/../../Private/Partials/');
+Registry::set('paths.typo3.fluid.templateRootPaths.cms', Registry::get('paths.root') . '/src/Private/Templates/');
+Registry::set('paths.typo3.fluid.layoutRootPaths.cms', Registry::get('paths.root') . '/src/Private/Layouts/');
+Registry::set('paths.typo3.fluid.partialRootPaths.cms', Registry::get('paths.root') . '/src/Private/Partials/');
 
 /** Cache Paths */
-Registry::set('paths.cache.default', __DIR__ . '/../../../.resources/cache');
+Registry::set('paths.cache.default', Registry::get('paths.root') . '/.resources/cache');
 
 /** Uploads Paths */
-Registry::set('paths.uploads.default', __DIR__ . '/../../../.resources/uploads');
+Registry::set('paths.uploads.default', Registry::get('paths.root') . '/.resources/uploads');
 
 /** Tokens Paths */
-Registry::set('paths.tokens.default', __DIR__ . '/../../../.resources/tokens');
+Registry::set('paths.tokens.default', Registry::get('paths.root') . '/.resources/tokens');
 
 /** Load Local Settings if exists */
 if (file_exists(__DIR__ . '/Registry.local.php')) {
