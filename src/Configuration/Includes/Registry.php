@@ -6,7 +6,7 @@ use Bleicker\Registry\Registry;
 Registry::set('paths.root', realpath(__DIR__ . '/../../../'));
 
 /** Doctrine Database Settings */
-Registry::set('doctrine.db.default.url', 'sqlite://' . Registry::get('paths.root') . '.resources/persistence/db.sqlite');
+Registry::set('doctrine.db.default.url', 'sqlite://notused:inthis@case/' . Registry::get('paths.root') . '.resources/persistence/db.sqlite');
 
 /** Doctrine Schemas */
 Registry::set('paths.doctrine.schema.nodes', Registry::get('paths.root') . '/vendor/bleicker/nodes/src/Schema/Persistence');
