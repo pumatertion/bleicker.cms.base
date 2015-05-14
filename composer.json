@@ -1,0 +1,34 @@
+{
+	"name": "bleicker/cms-base",
+	"type": "library",
+	"require": {
+		"bleicker/cms": "dev-develop",
+		"namelesscoder/fluid": "dev-master"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*"
+	},
+	"authors": [
+		{
+			"name": "Carsten Bleicker",
+			"email": "carsten@bleicker.de"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Bleicker\\Distribution\\Cms\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Bleicker\\Distribution\\Cms\\": "tests"
+		}
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "git@github.com:pumatertion/bleicker.cms.git"
+		}
+	],
+	"minimum-stability" : "dev"
+}

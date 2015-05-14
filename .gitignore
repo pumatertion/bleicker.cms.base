@@ -1,0 +1,8 @@
+/vendor
+/composer.lock
+/db.sqlite
+/bower_components
+/node_modules
+npm-debug.log
+.sass-cache
+*.local.php
