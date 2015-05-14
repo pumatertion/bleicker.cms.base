@@ -3,7 +3,8 @@
 use Bleicker\Registry\Registry;
 
 /** Doctrine Database Settings */
-Registry::set('doctrine.db.default', ['driver' => 'pdo_sqlite', 'path' => __DIR__ . '/../../../.resources/persistence/db.sqlite']);
+Registry::set('doctrine.db.default.driver', 'pdo_sqlite');
+Registry::set('doctrine.db.default.path', __DIR__ . '/../../../.resources/persistence/db.sqlite');
 
 /** Paths */
 Registry::set('paths.doctrine.schema.nodes', __DIR__ . "/../../../vendor/bleicker/nodes/src/Schema/Persistence");
