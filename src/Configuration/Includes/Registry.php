@@ -6,17 +6,24 @@ use Bleicker\Registry\Registry;
 Registry::set('doctrine.db.default.driver', 'pdo_sqlite');
 Registry::set('doctrine.db.default.path', __DIR__ . '/../../../.resources/persistence/db.sqlite');
 
-/** Paths */
+/** Doctrine Schemas */
 Registry::set('paths.doctrine.schema.nodes', __DIR__ . "/../../../vendor/bleicker/nodes/src/Schema/Persistence");
 Registry::set('paths.doctrine.schema.nodestypes', __DIR__ . "/../../../vendor/bleicker/nodetypes/src/Schema/Persistence");
 Registry::set('paths.doctrine.schema.account', __DIR__ . "/../../../vendor/bleicker/account/src/Schema/Persistence");
 
+/** Fluid Paths */
 Registry::set('paths.typo3.fluid.templateRootPaths.cms', __DIR__ . '/../../Private/Templates/');
 Registry::set('paths.typo3.fluid.layoutRootPaths.cms', __DIR__ . '/../../Private/Layouts/');
 Registry::set('paths.typo3.fluid.partialRootPaths.cms', __DIR__ . '/../../Private/Partials/');
 
+/** Cache Paths */
 Registry::set('paths.cache.default', __DIR__ . '/../../../.resources/cache');
+
+/** Uploads Paths */
 Registry::set('paths.uploads.default', __DIR__ . '/../../../.resources/uploads');
+
+/** Tokens Paths */
+Registry::set('paths.tokens.default', __DIR__ . '/../../../.resources/tokens');
 
 /** Load Local Settings if exists */
 if (file_exists(__DIR__ . '/Registry.local.php')) {
