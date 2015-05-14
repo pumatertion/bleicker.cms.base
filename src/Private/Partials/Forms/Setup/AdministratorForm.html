@@ -1,0 +1,21 @@
+<form class="form" action="/{cms:translation.systemLocale()}/authenticate" method="post">
+	<input type="hidden" name="interceptedUri" value="{interceptedUri}"/>
+	<fieldset>
+		<legend>
+			Please setup administrators username and password
+		</legend>
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input class="form-control" type="text" id="username" name="username"
+				   placeholder="Please enter your username"/>
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input class="form-control" type="password" id="password" name="password"
+				   placeholder="Please enter your password"/>
+		</div>
+	</fieldset>
+	<div class="form-group">
+		<input type="submit" value="Create" class="btn btn-primary"/>
+	</div>
+</form>

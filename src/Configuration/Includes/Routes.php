@@ -2,6 +2,7 @@
 
 use Bleicker\Cms\Controller\AuthenticationController;
 use Bleicker\Cms\Controller\NodeController;
+use Bleicker\Cms\Controller\SetupController;
 use Bleicker\ObjectManager\ObjectManager;
 use Bleicker\Routing\ControllerRouteData;
 use Bleicker\Routing\RouteInterface;
@@ -11,6 +12,15 @@ use Bleicker\Routing\RouterInterface;
 $router = ObjectManager::get(RouterInterface::class);
 $router
 	->addRoute('/', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
+	->addRoute('/setup', 'get', new ControllerRouteData(SetupController::class, 'setupAction'))
+	->addRoute('/setup/token', 'get', new ControllerRouteData(SetupController::class, 'newTokenAction'))
+	->addRoute('/setup/token', 'post', new ControllerRouteData(SetupController::class, 'createTokenAction'))
+	->addRoute('/setup/database', 'get', new ControllerRouteData(SetupController::class, 'setupDatabaseAction'))
+	->addRoute('/setup/database', 'post', new ControllerRouteData(SetupController::class, 'createDatabaseAction'))
+	->addRoute('/setup/admin', 'get', new ControllerRouteData(SetupController::class, 'setupAdministratorAction'))
+	->addRoute('/setup/admin', 'post', new ControllerRouteData(SetupController::class, 'createAdministratorAction'))
+	->addRoute('/setup/authentication', 'get', new ControllerRouteData(SetupController::class, 'authenticationAction'))
+	->addRoute('/setup/authentication', 'post', new ControllerRouteData(SetupController::class, 'setupAction'))
 	->addRoute('/logout', 'get', new ControllerRouteData(AuthenticationController::class, 'logoutAction'))
 	->addRoute('/authenticate', 'get', new ControllerRouteData(AuthenticationController::class, 'indexAction'))
 	->addRoute('/authenticate', 'post', new ControllerRouteData(AuthenticationController::class, 'authenticateAction'))
