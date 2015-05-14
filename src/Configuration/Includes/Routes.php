@@ -17,6 +17,7 @@ $router
 	->addRoute('/setup/token', 'post', new ControllerRouteData(SetupController::class, 'createTokenAction'))
 	->addRoute('/setup/database', 'get', new ControllerRouteData(SetupController::class, 'setupDatabaseAction'))
 	->addRoute('/setup/database', 'post', new ControllerRouteData(SetupController::class, 'createDatabaseAction'))
+	->addRoute('/setup/schema', 'post', new ControllerRouteData(SetupController::class, 'createSchemaAction'))
 	->addRoute('/setup/admin', 'get', new ControllerRouteData(SetupController::class, 'setupAdministratorAction'))
 	->addRoute('/setup/admin', 'post', new ControllerRouteData(SetupController::class, 'createAdministratorAction'))
 	->addRoute('/setup/authentication', 'get', new ControllerRouteData(SetupController::class, 'authenticationAction'))
