@@ -49,6 +49,10 @@ body {
   overflow-y: scroll;
 }
 
+.btn{
+  margin-bottom: $grid-gutter-width/4;
+}
+
 .col-first {
   margin-top: $grid-gutter-width/2;
   .nav {
