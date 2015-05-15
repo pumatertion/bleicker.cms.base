@@ -21,8 +21,6 @@ Page::register('page', 'Page', 'A simple page', NodeConfiguration::PAGE_GROUP, [
 /** Register Content */
 Headline::register('headline', 'Headline', 'Title and subtitle', NodeConfiguration::CONTENT_GROUP);
 Text::register('text', 'Text', 'Just text', NodeConfiguration::CONTENT_GROUP);
+Image::register('image', 'Image', 'A simple image', NodeConfiguration::CONTENT_GROUP);
 Grid::register('grid', 'Grid', 'Grid wich can contain grid-elements', NodeConfiguration::CONTENT_GROUP, [GridElementInterface::class]);
 GridElement::register('gridelement', 'Grid-Element', 'A Grid-Element', NodeConfiguration::CONTENT_GROUP, [ContentNodeInterface::class], [GridElementInterface::class]);
-
-/** Register Image */
-Image::register('image', 'Image', 'A simple image', NodeConfiguration::CONTENT_GROUP);
