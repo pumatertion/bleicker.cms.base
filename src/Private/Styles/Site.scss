@@ -107,8 +107,7 @@ body {
     }
     @extend .alert;
     position: relative;
-//    min-height: $grid-gutter-width*2;
-    padding: $grid-gutter-width/2 $grid-gutter-width;
+    padding: $grid-gutter-width $grid-gutter-width;
     margin: 0;
     margin-top: $grid-gutter-width/2;
     margin-bottom: $grid-gutter-width/2;
