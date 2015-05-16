@@ -1,6 +1,5 @@
 <?php
 
-use Bleicker\Nodes\Configuration\NodeConfiguration;
 use Bleicker\Nodes\Configuration\NodeConfigurationInterface;
 use Bleicker\Nodes\ContentNodeInterface;
 use Bleicker\Nodes\PageNodeInterface;
@@ -43,3 +42,6 @@ Grid::register('Grid', 'Grid wich can contain grid-elements', NodeConfigurationI
 GridElement::register('Grid-Element', 'A Grid-Element', NodeConfigurationInterface::CONTENT_GROUP)
 	->allowChild(ContentNodeInterface::class)
 	->forbidChild(GridElementInterface::class);
+
+Section::register('Section', 'A section element', NodeConfigurationInterface::CONTENT_GROUP)
+	->allowChild(ContentNodeInterface::class)->forbidChild(Section::class)->forbidChild(GridElement::class);
