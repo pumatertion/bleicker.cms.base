@@ -8,7 +8,6 @@ use Bleicker\Cms\TypeConverter\Node\NodeLocaleTypeConverter;
 use Bleicker\Cms\TypeConverter\Node\PageTypeConverter;
 use Bleicker\Cms\TypeConverter\Node\SiteTypeConverter;
 use Bleicker\Cms\TypeConverter\Node\TextTypeConverter;
-use Bleicker\Cms\TypeConverter\Request\MultipartApplicationRequestConverter;
 use Bleicker\Converter\TypeConverter\FloatTypeConverter;
 use Bleicker\Converter\TypeConverter\IntegerTypeConverter;
 use Bleicker\Converter\TypeConverter\StringTypeConverter;
