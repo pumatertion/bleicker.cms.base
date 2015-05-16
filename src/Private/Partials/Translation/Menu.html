@@ -1,5 +1,5 @@
 <div class="translation-menu">
-	<f:for each="{node->cms:translation.possibleTranslations(propertyName:propertyname)}" as="locale" key="alias">
+	<f:for each="{cms:translation.possibleTranslations()}" as="locale" key="alias">
 		<f:if condition="{locale} == {cms:translation.systemLocale()}">
 			<f:then>
 				<a class="btn btn-primary btn-xs" href="/{locale}/nodemanager/{node.id}">{alias}</a>
