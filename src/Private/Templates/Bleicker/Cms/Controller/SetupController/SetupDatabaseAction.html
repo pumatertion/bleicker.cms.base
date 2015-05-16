@@ -9,9 +9,13 @@
 <f:section name="docBody">
 	<div class="row">
 		<div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-			<f:render partial="Forms/Setup/DatabaseForm"/>
+			<f:render partial="Forms/Setup/DatabaseForm" arguments="{current:current}"/>
 		</div>
 	</div>
+</f:section>
+
+<f:section name="navigation">
+	<f:render partial="navigation"/>
 </f:section>
 
 <f:section name="footer">
