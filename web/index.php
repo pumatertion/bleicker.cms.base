@@ -2,13 +2,26 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
+use Bleicker\Exception\ThrowableException;
 use Bleicker\Framework\ApplicationFactory;
 
-ApplicationFactory::http(
-	function () {
-		include __DIR__ . '/../src/Configuration/Before.php';
-	},
-	function () {
-		include __DIR__ . '/../src/Configuration/After.php';
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
+
+try {
+	ApplicationFactory::http(
+		function () {
+			include __DIR__ . '/../src/Configuration/Before.php';
+		},
+		function () {
+			include __DIR__ . '/../src/Configuration/After.php';
+		}
+	)->run();
+} catch (Exception $exception) {
+	if ($exception instanceof ThrowableException) {
+		throw $exception;
 	}
-)->run();
+	/** @todo logging */
+	throw $exception;
+}

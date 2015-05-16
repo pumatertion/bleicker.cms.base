@@ -3,7 +3,8 @@
 	"type": "library",
 	"require": {
 		"bleicker/cms": "dev-develop",
-		"namelesscoder/fluid": "dev-master"
+		"namelesscoder/fluid": "dev-master",
+		"filp/whoops": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*"
@@ -30,5 +31,5 @@
 			"url": "git@github.com:pumatertion/bleicker.cms.git"
 		}
 	],
-	"minimum-stability" : "dev"
+	"minimum-stability": "dev"
 }
