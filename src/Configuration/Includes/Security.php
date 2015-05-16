@@ -26,7 +26,7 @@ Vote::register('SecuredController', function () {
  * Secure Setup
  */
 Vote::register('SetupController::setupAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290566);
 	}
 }, SetupController::class . '::setupAction');
@@ -35,7 +35,7 @@ Vote::register('SetupController::setupAction', function () {
  * Secure Setup
  */
 Vote::register('SetupController::setupDatabaseAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290567);
 	}
 }, SetupController::class . '::setupDatabaseAction');
@@ -44,7 +44,7 @@ Vote::register('SetupController::setupDatabaseAction', function () {
  * Secure Setup
  */
 Vote::register('SetupController::createDatabaseAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290568);
 	}
 }, SetupController::class . '::createDatabaseAction');
@@ -53,7 +53,7 @@ Vote::register('SetupController::createDatabaseAction', function () {
  * Secure Setup
  */
 Vote::register('SetupController::createSchemaAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290569);
 	}
 }, SetupController::class . '::createSchemaAction');
@@ -62,7 +62,7 @@ Vote::register('SetupController::createSchemaAction', function () {
  * Secure Setup
  */
 Vote::register('SetupController::setupAdministratorAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290570);
 	}
 }, SetupController::class . '::setupAdministratorAction');
@@ -71,7 +71,7 @@ Vote::register('SetupController::setupAdministratorAction', function () {
  * Secure Setup
  */
 Vote::register('SetupController::createAdministratorAction', function () {
-	if (!ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator')) {
+	if (!(ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Setup.Administrator') || ObjectManager::get(AuthenticationManagerInterface::class)->hasRole('Administrator'))) {
 		throw new SetupLoginBoxException('Administrator privilege required.', 1431290571);
 	}
 }, SetupController::class . '::createAdministratorAction');
