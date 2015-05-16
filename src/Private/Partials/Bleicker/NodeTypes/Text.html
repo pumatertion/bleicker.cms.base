@@ -4,7 +4,7 @@
 	<f:render partial="options" arguments="{node:node}"/>
 	<cms:format.nl2br>
 		<f:format.raw>
-			<cms:node.translate propertyName="body" node="{node}"/>
+			<cms:format.nodeTagParser prefix="/{cms:translation.systemLocale()}/nodemanager/"><cms:node.translate propertyName="body" node="{node}"/></cms:format.nodeTagParser>
 		</f:format.raw>
 	</cms:format.nl2br>
 </div>
