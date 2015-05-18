@@ -1,0 +1,3 @@
+Bleicker\Distribution\Domain\Model\Nodes\Grid:
+  type: entity
+  table: bleicker_distribution_domain_model_grid

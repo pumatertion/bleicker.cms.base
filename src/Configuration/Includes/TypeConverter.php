@@ -1,18 +1,19 @@
 <?php
 
-use Bleicker\Cms\TypeConverter\Node\GridElementTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\GridTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\HeadlineTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\ImageTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\NodeLocaleTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\PageTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\SectionTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\SiteTypeConverter;
-use Bleicker\Cms\TypeConverter\Node\TextTypeConverter;
 use Bleicker\Converter\TypeConverter\FloatTypeConverter;
 use Bleicker\Converter\TypeConverter\IntegerTypeConverter;
 use Bleicker\Converter\TypeConverter\StringTypeConverter;
+use Bleicker\Distribution\TypeConverter\NodeLocaleTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\GridElementTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\GridTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\HeadlineTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\ImageTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\PageTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\SectionTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\SiteTypeConverter;
+use Bleicker\Distribution\TypeConverter\Node\TextTypeConverter;
 
+ImageTypeConverter::register();
 IntegerTypeConverter::register();
 FloatTypeConverter::register();
 StringTypeConverter::register();
@@ -23,5 +24,4 @@ TextTypeConverter::register();
 GridTypeConverter::register();
 GridElementTypeConverter::register();
 NodeLocaleTypeConverter::register();
-ImageTypeConverter::register();
 SectionTypeConverter::register();

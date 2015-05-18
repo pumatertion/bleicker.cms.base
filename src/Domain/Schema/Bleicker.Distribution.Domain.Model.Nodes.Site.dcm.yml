@@ -1,0 +1,6 @@
+Bleicker\Distribution\Domain\Model\Nodes\Site:
+  type: entity
+  table: bleicker_distribution_domain_model_site
+  fields:
+    title:
+      type: string

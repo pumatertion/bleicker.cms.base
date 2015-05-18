@@ -1,0 +1,9 @@
+Bleicker\Distribution\Domain\Model\Nodes\Headline:
+  type: entity
+  table: bleicker_distribution_domain_model_headline
+  fields:
+    title:
+      type: string
+    subtitle:
+      type: string
+      nullable: true

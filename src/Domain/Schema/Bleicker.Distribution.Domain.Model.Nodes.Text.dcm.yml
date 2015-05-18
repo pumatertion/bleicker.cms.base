@@ -1,0 +1,7 @@
+Bleicker\Distribution\Domain\Model\Nodes\Text:
+  type: entity
+  table: bleicker_distribution_domain_model_text
+  fields:
+    body:
+      type: text
+      nullable: true

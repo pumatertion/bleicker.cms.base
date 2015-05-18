@@ -1,0 +1,13 @@
+Bleicker\Distribution\Domain\Model\Nodes\Image:
+  type: entity
+  table: bleicker_distribution_domain_model_image
+  fields:
+    title:
+      type: string
+      nullable: true
+    alt:
+      type: string
+      nullable: true
+    resource:
+      type: string
+      nullable: true

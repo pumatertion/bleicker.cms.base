@@ -3,15 +3,15 @@
 use Bleicker\Nodes\Configuration\NodeConfigurationInterface;
 use Bleicker\Nodes\ContentNodeInterface;
 use Bleicker\Nodes\PageNodeInterface;
-use Bleicker\NodeTypes\Grid;
-use Bleicker\NodeTypes\GridElement;
-use Bleicker\NodeTypes\GridElementInterface;
-use Bleicker\NodeTypes\Headline;
-use Bleicker\NodeTypes\Image;
-use Bleicker\NodeTypes\Page;
-use Bleicker\NodeTypes\Section;
-use Bleicker\NodeTypes\Site;
-use Bleicker\NodeTypes\Text;
+use Bleicker\Distribution\Domain\Model\Nodes\Grid;
+use Bleicker\Distribution\Domain\Model\Nodes\GridElement;
+use Bleicker\Distribution\Domain\Model\Nodes\GridElementInterface;
+use Bleicker\Distribution\Domain\Model\Nodes\Headline;
+use Bleicker\Distribution\Domain\Model\Nodes\Image;
+use Bleicker\Distribution\Domain\Model\Nodes\Page;
+use Bleicker\Distribution\Domain\Model\Nodes\Section;
+use Bleicker\Distribution\Domain\Model\Nodes\Site;
+use Bleicker\Distribution\Domain\Model\Nodes\Text;
 
 /** Register Sites and allow child types */
 Site::register('Website', 'The root page of a domain', NodeConfigurationInterface::SITE_GROUP)
