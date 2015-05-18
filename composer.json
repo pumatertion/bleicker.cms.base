@@ -17,12 +17,12 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Bleicker\\Distribution\\Cms\\": "src"
+			"Bleicker\\Distribution\\": "src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Tests\\Bleicker\\Distribution\\Cms\\": "tests"
+			"Tests\\Bleicker\\Distribution\\": "tests"
 		}
 	},
 	"repositories": [
