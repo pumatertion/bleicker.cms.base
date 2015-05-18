@@ -71,6 +71,13 @@ body {
         display: inline-block;
         padding: 0.25em 0.5em;
       }
+      &.hidden {
+        display: block !important;
+        opacity: 0.25;
+        &.active{
+          opacity: 0.65;
+        }
+      }
     }
   }
 }

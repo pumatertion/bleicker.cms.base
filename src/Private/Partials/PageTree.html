@@ -2,7 +2,7 @@
 
 <cms:menus.pageTree of="{of}">
 	<ol class="nav nav-pills">
-		<li class="{f:if(condition:'{of.id}=={current.id}', then:' active', else:' inactive')}">
+		<li class="{f:if(condition:'{of.id}=={current.id}', then:'active', else:'inactive')}{f:if(condition:'{of.hidden}', then:' hidden')}">
 			<a href="/{cms:translation.systemLocale()}/nodemanager/{of.id}">
 				<f:if condition="{of.title}">
 					<f:then><cms:node.translate propertyName="title" node="{of}"/></f:then>
