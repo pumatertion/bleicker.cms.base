@@ -73,9 +73,9 @@ body {
       }
       &.hidden {
         display: block !important;
-        opacity: 0.25;
+        opacity: 0.4;
         &.active{
-          opacity: 0.65;
+          opacity: 0.85;
         }
       }
     }
@@ -99,6 +99,13 @@ body {
 }
 
 .col-second {
+  &.hidden {
+    display: block !important;
+    opacity: 0.5;
+    &.active{
+      opacity: 0.85;
+    }
+  }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
@@ -141,9 +148,9 @@ body {
     }
     &.hidden {
       display: block !important;
-      opacity: 0.25;
+      opacity: 0.5;
       &.active{
-        opacity: 0.65;
+        opacity: 0.85;
       }
     }
     .options {
