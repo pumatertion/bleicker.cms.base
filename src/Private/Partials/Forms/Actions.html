@@ -1,14 +1,32 @@
 <f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers"/>
 
+<hr/>
 <f:if condition="{cms:translation.isLocalizationMode()}">
 	<f:then>
-		<button type="submit" class="btn btn-primary btn-action">Update Translation</button>
-		<a href="/{cms:translation.systemLocale()}/nodemanager/remove/{node.id}"
-		   class="btn btn-danger btn-action">Delete Translation</a>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-action">Update Translation</button>
+			<a href="/{cms:translation.systemLocale()}/nodemanager/remove/{node.id}" class="btn btn-danger btn-action">Delete Translation</a>
+		</div>
 	</f:then>
 	<f:else>
-		<button type="submit" class="btn btn-primary btn-action">Update</button>
-		<a href="/{cms:translation.systemLocale()}/nodemanager/remove/{node.id}"
-		   class="btn btn-danger btn-action">Delete</a>
+		<div class="checkbox">
+			<input type="hidden" name="hidden" value="0"/>
+			<label for="hidden">
+				<f:if condition="{node.hidden}">
+					<f:then>
+						<input type="checkbox" id="hidden" name="hidden" value="1" checked="checked"/>
+					</f:then>
+					<f:else>
+						<input type="checkbox" id="hidden" name="hidden" value="1"/>
+					</f:else>
+				</f:if>
+				Is hidden
+			</label>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-action">Update</button>
+			<a href="/{cms:translation.systemLocale()}/nodemanager/remove/{node.id}" class="btn btn-danger btn-action">Delete</a>
+		</div>
 	</f:else>
 </f:if>
