@@ -132,6 +132,13 @@ body {
     &.active {
       border: 1px $gray-light solid;
     }
+    &.hidden {
+      display: block !important;
+      opacity: 0.25;
+      &.active{
+        opacity: 0.65;
+      }
+    }
     .options {
       display: none;
       border: none;
