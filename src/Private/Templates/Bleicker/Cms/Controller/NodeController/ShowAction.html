@@ -10,11 +10,10 @@
 	<div class="row">
 		<div class="col-lg-2 col-first">
 			<f:for each="{sites}" as="root">
-				<section>
+				<section class="page-tree">
 					<f:render partial="pageTree" arguments="{of:root, current:page}"/>
 				</section>
 			</f:for>
-			<hr/>
 		</div>
 		<div class="col-lg-7 col-second{f:if(condition:'{page.hidden}', then:' hidden')}">
 			<f:render partial="contentTree" arguments="{of:page, current:node}"/>

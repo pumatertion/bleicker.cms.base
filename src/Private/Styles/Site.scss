@@ -55,6 +55,11 @@ body {
 
 .col-first {
   margin-top: $grid-gutter-width/2;
+  section{
+    &.page-tree{
+      margin-bottom: $grid-gutter-width/3;
+    }
+  }
   .nav {
     list-style-type: none;
     margin: 0;
