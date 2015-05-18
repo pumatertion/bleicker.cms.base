@@ -3,7 +3,14 @@
 <f:layout name="default"/>
 
 <f:section name="docTitle">
-	<cms:node.translate propertyName="title">{page}</cms:node.translate>
+	<f:if condition="{page}">
+		<f:then>
+			<cms:node.translate propertyName="title">{page}</cms:node.translate>
+		</f:then>
+		<f:else>
+			Please create your first site node
+		</f:else>
+	</f:if>
 </f:section>
 
 <f:section name="docBody">
