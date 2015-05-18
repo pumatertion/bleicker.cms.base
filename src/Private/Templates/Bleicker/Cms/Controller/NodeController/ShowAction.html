@@ -15,7 +15,6 @@
 				</section>
 			</f:for>
 			<hr/>
-			<f:render partial="createSiteLink"/>
 		</div>
 		<div class="col-lg-7 col-second{f:if(condition:'{page.hidden}', then:' hidden')}">
 			<f:render partial="contentTree" arguments="{of:page, current:node}"/>
