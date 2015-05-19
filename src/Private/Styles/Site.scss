@@ -49,6 +49,13 @@ body {
   overflow-y: scroll;
 }
 
+.validation-property-error{
+  font-weight: normal;
+  color: $alert-danger-text;
+  padding: $padding-base-vertical $padding-base-horizontal;
+  display: block;
+}
+
 .btn {
   margin-bottom: $grid-gutter-width/4;
 }
