@@ -4,11 +4,27 @@
 			<fieldset>
 				<legend>Update site properties</legend>
 				<dis:validation.validationResults propertyPath="title">
-					<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
-						<label for="title">Title</label>
-						<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
-							   placeholder="Please give the site a title"/>
-					</div>
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+								<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
+									<f:if condition="{iteration.index}==0">
+											<label for="title">Title</label>
+											<input class="form-control" type="text" id="title" name="title" value="{validationResult.propertyValue}"
+												   placeholder="Please give the site a title"/>
+									</f:if>
+									<label class="validation-property-error" for="title">{validationResult}</label>
+								</div>
+							</f:for>
+						</f:then>
+						<f:else>
+							<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
+								<label for="title">Title</label>
+								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
+									   placeholder="Please give the site a title"/>
+							</div>
+						</f:else>
+					</f:if>
 				</dis:validation.validationResults>
 			</fieldset>
 			<div class="form-group">
