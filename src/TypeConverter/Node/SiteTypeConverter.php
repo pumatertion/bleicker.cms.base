@@ -3,6 +3,7 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Domain\Model\Nodes\Site;
 use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
 use Bleicker\Framework\Validation\ErrorInterface;
@@ -12,7 +13,6 @@ use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
 use Bleicker\Nodes\NodeTranslation;
-use Bleicker\Distribution\Domain\Model\Nodes\Site;
 use Bleicker\ObjectManager\ObjectManager;
 
 /**
@@ -96,7 +96,6 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 * Returns an updated site mapped with source arguments
 	 *
 	 * @param array $source
-	 * @throws ValidationException
 	 * @return Site
 	 */
 	protected function getUpdated(array $source) {
@@ -110,19 +109,10 @@ class SiteTypeConverter extends AbstractTypeConverter {
 		/** @var Site $node */
 		$node = $this->nodeService->get($nodeId);
 
-		$node->setTitle(Arrays::getValueByPath($source, 'title') === NULL ? '' : Arrays::getValueByPath($source, 'title'));
+		$node->setTitle(Arrays::getValueByPath($source, 'title'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
 
-		/** @var ResultsInterface $validationResults */
-		$validationResults = ObjectManager::get(ResultsInterface::class);
-		$notNullValidationResult = NotEmptyValidator::create()->validate($node->getTitle());
-		if($notNullValidationResult instanceof ErrorInterface){
-			$validationResults->add('title', $node->getTitle(), $notNullValidationResult);
-		}
-
-		if(count($validationResults->storage())){
-			throw ValidationException::create('Your data is invalid', 1431981824);
-		}
+		$this->runValidation($node);
 
 		return $node;
 	}
@@ -149,5 +139,23 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 */
 	protected function getNodeLocale() {
 		return $this->converter->convert($this->locales->getSystemLocale(), Locale::class);
+	}
+
+	/**
+	 * @param Site $node
+	 * @throws ValidationException
+	 */
+	protected function runValidation(Site $node) {
+		/** @var ResultsInterface $validationResults */
+		$validationResults = ObjectManager::get(ResultsInterface::class);
+
+		$notNullValidationResult = NotEmptyValidator::create()->validate($node->getTitle());
+		if ($notNullValidationResult instanceof ErrorInterface) {
+			$validationResults->add('title', $node->getTitle(), $notNullValidationResult);
+		}
+
+		if (count($validationResults->storage())) {
+			throw ValidationException::create('Your data is invalid', 1431981824);
+		}
 	}
 }
