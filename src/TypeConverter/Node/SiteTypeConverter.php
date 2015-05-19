@@ -3,7 +3,11 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
+use Bleicker\Framework\Validation\ErrorInterface;
+use Bleicker\Framework\Validation\Exception\ValidationException;
+use Bleicker\Framework\Validation\ResultsInterface;
 use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
@@ -92,6 +96,7 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 * Returns an updated site mapped with source arguments
 	 *
 	 * @param array $source
+	 * @throws ValidationException
 	 * @return Site
 	 */
 	protected function getUpdated(array $source) {
@@ -107,6 +112,17 @@ class SiteTypeConverter extends AbstractTypeConverter {
 
 		$node->setTitle(Arrays::getValueByPath($source, 'title') === NULL ? '' : Arrays::getValueByPath($source, 'title'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
+
+		/** @var ResultsInterface $validationResults */
+		$validationResults = ObjectManager::get(ResultsInterface::class);
+		$notNullValidationResult = NotEmptyValidator::create()->validate($node->getTitle());
+		if($notNullValidationResult instanceof ErrorInterface){
+			$validationResults->add('title', $node->getTitle(), $notNullValidationResult);
+		}
+
+		if(count($validationResults->storage())){
+			throw ValidationException::create('Your data is invalid', 1431981824);
+		}
 
 		return $node;
 	}
