@@ -14,6 +14,8 @@ use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
 use Bleicker\Nodes\NodeTranslation;
 use Bleicker\ObjectManager\ObjectManager;
+use Bleicker\Translation\LocalesInterface;
+use Bleicker\Translation\Translation;
 
 /**
  * Class SiteTypeConverter
@@ -129,6 +131,8 @@ class SiteTypeConverter extends AbstractTypeConverter {
 		$node = $this->nodeService->get($nodeId);
 
 		$titleTranslation = new NodeTranslation('title', $this->getNodeLocale(), Arrays::getValueByPath($source, 'title'));
+		$this->runLocalizedValidation($titleTranslation);
+
 		$this->nodeService->addTranslation($node, $titleTranslation->setNode($node));
 
 		return $node;
@@ -139,6 +143,24 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 */
 	protected function getNodeLocale() {
 		return $this->converter->convert($this->locales->getSystemLocale(), Locale::class);
+	}
+
+	/**
+	 * @param NodeTranslation $titleTranslation
+	 * @throws ValidationException
+	 */
+	protected function runLocalizedValidation(NodeTranslation $titleTranslation){
+		/** @var ResultsInterface $validationResults */
+		$validationResults = ObjectManager::get(ResultsInterface::class);
+
+		$notNullValidationResult = NotEmptyValidator::create()->validate($titleTranslation->getValue());
+		if ($notNullValidationResult instanceof ErrorInterface) {
+			$validationResults->add('title', $titleTranslation->getValue(), $notNullValidationResult);
+		}
+
+		if (count($validationResults->storage())) {
+			throw ValidationException::create('Your data is invalid', 1431981824);
+		}
 	}
 
 	/**
