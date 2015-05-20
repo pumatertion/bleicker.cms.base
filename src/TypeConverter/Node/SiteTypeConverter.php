@@ -6,6 +6,7 @@ use Bleicker\Converter\AbstractTypeConverter;
 use Bleicker\Distribution\Domain\Model\Nodes\Site;
 use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
+use Bleicker\Framework\Validation\ArrayValidator;
 use Bleicker\Framework\Validation\ErrorInterface;
 use Bleicker\Framework\Validation\Exception\ValidationException;
 use Bleicker\Framework\Validation\ResultsInterface;
@@ -14,8 +15,6 @@ use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
 use Bleicker\Nodes\NodeTranslation;
 use Bleicker\ObjectManager\ObjectManager;
-use Bleicker\Translation\LocalesInterface;
-use Bleicker\Translation\Translation;
 
 /**
  * Class SiteTypeConverter
@@ -49,8 +48,14 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	/**
 	 * @param array $source
 	 * @return Site
+	 * @throws ValidationException
 	 */
 	public function convert($source) {
+		$notEmptyValidator = new NotEmptyValidator();
+		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
+		if ($validationResults->count() > 0) {
+			throw ValidationException::create($validationResults, 'Validation failed', 1432156044);
+		}
 		if ($this->isUpdate($source)) {
 			return $this->getUpdated($source);
 		}
@@ -104,18 +109,12 @@ class SiteTypeConverter extends AbstractTypeConverter {
 		if ($this->isLocalizationMode()) {
 			return $this->getLocalized($source);
 		}
-
 		$nodeId = Arrays::getValueByPath($source, $this->getIdPath());
 		Arrays::unsetValueByPath($source, $this->getIdPath());
-
 		/** @var Site $node */
 		$node = $this->nodeService->get($nodeId);
-
 		$node->setTitle(Arrays::getValueByPath($source, 'title'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
-
-		$this->runValidation($node);
-
 		return $node;
 	}
 
@@ -126,15 +125,10 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	protected function getLocalized(array $source) {
 		$nodeId = Arrays::getValueByPath($source, $this->getIdPath());
 		Arrays::unsetValueByPath($source, $this->getIdPath());
-
 		/** @var Site $node */
 		$node = $this->nodeService->get($nodeId);
-
 		$titleTranslation = new NodeTranslation('title', $this->getNodeLocale(), Arrays::getValueByPath($source, 'title'));
-		$this->runLocalizedValidation($titleTranslation);
-
 		$this->nodeService->addTranslation($node, $titleTranslation->setNode($node));
-
 		return $node;
 	}
 
@@ -143,41 +137,5 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 */
 	protected function getNodeLocale() {
 		return $this->converter->convert($this->locales->getSystemLocale(), Locale::class);
-	}
-
-	/**
-	 * @param NodeTranslation $titleTranslation
-	 * @throws ValidationException
-	 */
-	protected function runLocalizedValidation(NodeTranslation $titleTranslation){
-		/** @var ResultsInterface $validationResults */
-		$validationResults = ObjectManager::get(ResultsInterface::class);
-
-		$notNullValidationResult = NotEmptyValidator::create()->validate($titleTranslation->getValue());
-		if ($notNullValidationResult instanceof ErrorInterface) {
-			$validationResults->add('title', $titleTranslation->getValue(), $notNullValidationResult);
-		}
-
-		if (count($validationResults->storage())) {
-			throw ValidationException::create('Your data is invalid', 1431981824);
-		}
-	}
-
-	/**
-	 * @param Site $node
-	 * @throws ValidationException
-	 */
-	protected function runValidation(Site $node) {
-		/** @var ResultsInterface $validationResults */
-		$validationResults = ObjectManager::get(ResultsInterface::class);
-
-		$notNullValidationResult = NotEmptyValidator::create()->validate($node->getTitle());
-		if ($notNullValidationResult instanceof ErrorInterface) {
-			$validationResults->add('title', $node->getTitle(), $notNullValidationResult);
-		}
-
-		if (count($validationResults->storage())) {
-			throw ValidationException::create('Your data is invalid', 1431981824);
-		}
 	}
 }

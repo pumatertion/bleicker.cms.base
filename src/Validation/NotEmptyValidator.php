@@ -4,6 +4,7 @@ namespace Bleicker\Distribution\Validation;
 
 use Bleicker\Framework\Validation\AbstractValidator;
 use Bleicker\Framework\Validation\Error;
+use Bleicker\Framework\Validation\Message;
 use Bleicker\Framework\Validation\ResultInterface;
 
 /**
@@ -15,14 +16,17 @@ class NotEmptyValidator extends AbstractValidator {
 
 	/**
 	 * @param mixed $source
-	 * @return ResultInterface
+	 * @return $this
 	 */
 	public function validate($source = NULL) {
 		if ($source === NULL) {
-			return Error::create('Validation Error (%1s): NULL is not allowed for property "%2s".', 1432036800);
+			$message = new Message('Null is not allowed', 1432036800, $source);
+			$this->results->add($message);
 		}
 		if (empty($source)) {
-			return Error::create('Validation Error (%1s): Property "%2s" is empty.', 1432036801);
+			$message = new Message('Empty values not allowed', 1432036801, $source);
+			$this->results->add($message);
 		}
+		return $this;
 	}
 }

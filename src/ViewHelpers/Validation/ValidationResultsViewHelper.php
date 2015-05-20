@@ -2,11 +2,12 @@
 
 namespace Bleicker\Distribution\ViewHelpers\Validation;
 
+use Bleicker\Framework\Validation\MessageInterface;
 use Bleicker\Framework\Validation\ResultInterface;
 use Bleicker\Framework\Validation\ResultsInterface;
 use Bleicker\ObjectManager\ObjectManager;
 use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
-
+use Bleicker\Framework\Validation\ResultCollectionInterface;
 /**
  * Class ValidationResultsViewHelper
  *
@@ -25,15 +26,6 @@ class ValidationResultsViewHelper extends AbstractViewHelper {
 	protected $escapeOutput = FALSE;
 
 	/**
-	 * @var ResultsInterface
-	 */
-	protected $validationResults;
-
-	public function __construct() {
-		$this->validationResults = ObjectManager::get(ResultsInterface::class);
-	}
-
-	/**
 	 * Initialize the arguments.
 	 *
 	 * @return void
@@ -41,37 +33,36 @@ class ValidationResultsViewHelper extends AbstractViewHelper {
 	public function initializeArguments() {
 		$this->registerArgument('as', 'string', 'Variablename of assigned results', TRUE, 'validationResults');
 		$this->registerArgument('propertyPath', 'string', 'Show only validation results matching this property path', TRUE, NULL);
+		$this->registerArgument('results', 'mixed', 'Validation Results', TRUE);
 	}
 
 	/**
-	 * @return ResultInterface[]
+	 * @return ResultCollectionInterface
 	 */
 	public function render() {
 		/** @var string $as */
 		$as = $this->arguments['as'];
-
 		$this->templateVariableContainer->add($as, $this->getValidationResults());
 		$result = $this->renderChildren();
 		$this->templateVariableContainer->remove($as);
-
 		return $result;
 	}
 
 	/**
-	 * @return ResultInterface[]
+	 * @return ResultCollectionInterface
 	 */
 	protected function getValidationResults() {
 		$propertyPath = $this->arguments['propertyPath'];
-		$allValidationResults = $this->validationResults->storage();
-		if ($propertyPath !== NULL) {
-			$matchingValidationResults = [];
-			foreach ($allValidationResults as $result) {
-				if ((boolean)stristr($result->getPropertyPath(), $propertyPath)) {
-					$matchingValidationResults[] = $result;
-				}
-			}
-			return $matchingValidationResults;
+		/** @var ResultCollectionInterface $validationResults */
+		$validationResults = $this->arguments['results'];
+		if(!($validationResults instanceof ResultCollectionInterface)){
+			return NULL;
 		}
-		return $allValidationResults;
+		if ($propertyPath !== NULL) {
+			$validationResults = $validationResults->filter(function(MessageInterface $message) use ($propertyPath){
+				return $propertyPath === $message->getPropertyPath();
+			});
+		}
+		return $validationResults;
 	}
 }

@@ -1,8 +1,8 @@
 <fluid xmlns:dis="Bleicker\Distribution\ViewHelpers">
-	<dis:validation.validationResults>
+	<dis:validation.validationResults results="{validationException.results}">
 		<f:if condition="{validationResults->f:count()}">
 			<div class="container-fluid">
-				<dl class="alert alert-danger">
+				<dl class="alert alert-danger alert-validation-results">
 					<f:groupedFor each="{validationResults}" as="groupedValidationResults" groupBy="propertyPath"
 								  groupKey="group">
 						<dt>Validitation failed for "{group}"</dt>

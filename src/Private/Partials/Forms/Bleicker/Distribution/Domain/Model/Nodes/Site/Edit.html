@@ -1,21 +1,23 @@
-<fluid xmlns:dis="Bleicker\Distribution\ViewHelpers" xmlns:cms="Bleicker\Cms\ViewHelpers"/>
+<fluid
+		xmlns:dis="Bleicker\Distribution\ViewHelpers"
+		xmlns:cms="Bleicker\Cms\ViewHelpers">
 	<f:alias map="{systemLocale:'{cms:translation.systemLocale()}'}">
 		<form class="form" action="/{systemLocale}/nodemanager/update/{node.id}" method="post">
 			<fieldset>
 				<legend>Update site properties</legend>
-				<dis:validation.validationResults propertyPath="title">
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
-							<f:for each="{validationResults}" as="validationResult" iteration="iteration">
-								<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
-									<f:if condition="{iteration.index}==0">
+							<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+										<f:if condition="{0:iteration.cycle}=={0:1}">
 											<label for="title">Title</label>
-											<input class="form-control" type="text" id="title" name="title" value="{validationResult.propertyValue}"
+											<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
 												   placeholder="Please give the site a title"/>
-									</f:if>
-									<label class="validation-property-error" for="title">{validationResult}</label>
-								</div>
-							</f:for>
+										</f:if>
+										<label class="validation-property-error" for="title">{validationResult}</label>
+								</f:for>
+							</div>
 						</f:then>
 						<f:else>
 							<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
