@@ -89,6 +89,7 @@ class ImageTypeConverter extends AbstractTypeConverter {
 		$node = new Image();
 		$node->setTitle(Arrays::getValueByPath($source, 'title') !== NULL ? : '');
 		$node->setAlt(Arrays::getValueByPath($source, 'alt') !== NULL ? : '');
+		$node->setHidden(TRUE);
 		return $node;
 	}
 

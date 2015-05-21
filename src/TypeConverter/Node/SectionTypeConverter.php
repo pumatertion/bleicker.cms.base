@@ -82,6 +82,7 @@ class SectionTypeConverter extends AbstractTypeConverter {
 	 */
 	protected function getNew(array $source) {
 		$node = new Section();
+		$node->setHidden(TRUE);
 		return $node;
 	}
 
