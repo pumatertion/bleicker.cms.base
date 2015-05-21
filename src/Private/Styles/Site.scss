@@ -60,6 +60,10 @@ body {
 .alert-validation-results {
   dt {
     font-size: $font-size-h3;
+    margin-top: $grid-gutter-width/2;
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 
