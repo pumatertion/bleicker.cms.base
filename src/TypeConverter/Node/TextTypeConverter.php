@@ -102,6 +102,7 @@ class TextTypeConverter extends AbstractTypeConverter {
 	protected function getNew(array $source) {
 		$node = new Text();
 		$node->setBody(Arrays::getValueByPath($source, 'body') !== NULL ? : '');
+		$node->setHidden(TRUE);
 		return $node;
 	}
 
