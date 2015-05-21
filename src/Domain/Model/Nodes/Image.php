@@ -24,7 +24,12 @@ class Image extends AbstractContentNode {
 	/**
 	 * @var string
 	 */
-	protected $resource;
+	protected $figure;
+
+	/**
+	 * @var string
+	 */
+	protected $caption;
 
 	/**
 	 * @param string $alt
@@ -59,18 +64,34 @@ class Image extends AbstractContentNode {
 	}
 
 	/**
-	 * @param string $resource
+	 * @param string $figure
 	 * @return $this
 	 */
-	public function setResource($resource = NULL) {
-		$this->resource = $resource;
+	public function setFigure($figure = NULL) {
+		$this->figure = $figure;
 		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getResource() {
-		return $this->resource;
+	public function getFigure() {
+		return $this->figure;
+	}
+
+	/**
+	 * @param string $caption
+	 * @return $this
+	 */
+	public function setCaption($caption = NULL) {
+		$this->caption = $caption;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCaption() {
+		return $this->caption;
 	}
 }

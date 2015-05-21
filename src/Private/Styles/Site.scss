@@ -49,10 +49,16 @@ body {
   overflow-y: scroll;
 }
 
+figure{
+  figcaption{
+    padding: $padding-base-vertical 0;
+  }
+}
+
 .validation-property-error {
   font-weight: normal;
   color: $alert-danger-text;
-  padding: $padding-base-horizontal/2 $padding-base-horizontal 0 $padding-base-horizontal;
+  padding: $padding-base-vertical $padding-base-horizontal 0 $padding-base-horizontal;
   margin: 0;
   display: block;
 }

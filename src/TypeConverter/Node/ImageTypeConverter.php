@@ -111,6 +111,7 @@ class ImageTypeConverter extends AbstractTypeConverter {
 		$node = new Image();
 		$node->setTitle(Arrays::getValueByPath($source, 'title') !== NULL ? : '');
 		$node->setAlt(Arrays::getValueByPath($source, 'alt') !== NULL ? : '');
+		$node->setCaption(Arrays::getValueByPath($source, 'caption') !== NULL ? : '');
 		$node->setHidden(TRUE);
 		return $node;
 	}
@@ -134,13 +135,14 @@ class ImageTypeConverter extends AbstractTypeConverter {
 
 		$node->setTitle(Arrays::getValueByPath($source, 'title'));
 		$node->setAlt(Arrays::getValueByPath($source, 'alt'));
+		$node->setCaption(Arrays::getValueByPath($source, 'caption'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
 
-		$resource = Arrays::getValueByPath($source, 'resource');
-		if ($resource instanceof UploadedFile) {
-			$this->remove($node->getResource());
-			$fileName = $this->move($resource);
-			$node->setResource($fileName);
+		$figure = Arrays::getValueByPath($source, 'figure');
+		if ($figure instanceof UploadedFile) {
+			$this->remove($node->getFigure());
+			$fileName = $this->move($figure);
+			$node->setFigure($fileName);
 		}
 
 		return $node;
@@ -163,15 +165,18 @@ class ImageTypeConverter extends AbstractTypeConverter {
 		$altTranslation = new NodeTranslation('alt', $this->getNodeLocale(), Arrays::getValueByPath($source, 'alt'));
 		$this->nodeService->addTranslation($node, $altTranslation->setNode($node));
 
-		$resource = Arrays::getValueByPath($source, 'resource');
-		if ($resource instanceof UploadedFile) {
-			$translation = new Translation('resource', $this->locales->getSystemLocale());
+		$captionTranslation = new NodeTranslation('caption', $this->getNodeLocale(), Arrays::getValueByPath($source, 'caption'));
+		$this->nodeService->addTranslation($node, $captionTranslation->setNode($node));
+
+		$figure = Arrays::getValueByPath($source, 'figure');
+		if ($figure instanceof UploadedFile) {
+			$translation = new Translation('figure', $this->locales->getSystemLocale());
 			if ($node->hasTranslation($translation)) {
 				$this->remove($node->getTranslation($translation)->getValue());
 			}
-			$fileName = $this->move($resource);
-			$resourceTranslation = new NodeTranslation('resource', $this->getNodeLocale(), $fileName);
-			$this->nodeService->addTranslation($node, $resourceTranslation->setNode($node));
+			$fileName = $this->move($figure);
+			$figureTranslation = new NodeTranslation('figure', $this->getNodeLocale(), $fileName);
+			$this->nodeService->addTranslation($node, $figureTranslation->setNode($node));
 		}
 
 		return $node;
@@ -185,27 +190,27 @@ class ImageTypeConverter extends AbstractTypeConverter {
 	}
 
 	/**
-	 * @param string $resource
+	 * @param string $figure
 	 * @return boolean
 	 */
-	protected function remove($resource = NULL) {
-		if ($resource !== NULL || !empty($resource)) {
+	protected function remove($figure = NULL) {
+		if ($figure !== NULL || !empty($figure)) {
 			$directory = realpath(Registry::get('paths.uploads.default'));
-			$resourcePath = $directory . '/' . $resource;
-			if (file_exists($resourcePath)) {
-				return unlink($resourcePath);
+			$figurePath = $directory . '/' . $figure;
+			if (file_exists($figurePath)) {
+				return unlink($figurePath);
 			}
 		}
 		return FALSE;
 	}
 
 	/**
-	 * @param UploadedFile $resource
+	 * @param UploadedFile $figure
 	 * @return string The name of the file after upload
 	 */
-	protected function move(UploadedFile $resource) {
+	protected function move(UploadedFile $figure) {
 		$directory = realpath(Registry::get('paths.uploads.default'));
-		$movedFile = $resource->move($directory, $resource->getClientOriginalName() . uniqid('_', TRUE) . '.' . $resource->guessExtension());
+		$movedFile = $figure->move($directory, $figure->getClientOriginalName() . uniqid('_', TRUE) . '.' . $figure->guessExtension());
 		return $movedFile->getFilename();
 	}
 }

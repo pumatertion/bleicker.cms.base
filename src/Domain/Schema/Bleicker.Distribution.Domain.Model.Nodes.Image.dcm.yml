@@ -8,6 +8,9 @@ Bleicker\Distribution\Domain\Model\Nodes\Image:
     alt:
       type: string
       nullable: true
-    resource:
+    figure:
       type: string
+      nullable: true
+    caption:
+      type: text
       nullable: true

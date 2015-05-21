@@ -50,23 +50,46 @@
 						</f:else>
 					</f:if>
 				</dis:validation.validationResults>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="resource">
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="figure">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
-											<label for="title">Resource</label>
-											<input type="file" accept="image/*" class="form-control" id="resource" name="resource" value="{validationResult.source}"/>
+											<label for="figure">Figure</label>
+											<input type="file" accept="image/*" class="form-control" id="figure" name="figure" value="{validationResult.source}"/>
 									</f:if>
-									<label class="validation-property-error" for="resource">{validationResult}</label>
+									<label class="validation-property-error" for="figure">{validationResult}</label>
 								</f:for>
 							</div>
 						</f:then>
 						<f:else>
 							<div class="form-group">
-								<label for="title">Resource</label>
-								<input type="file" accept="image/*" class="form-control" id="resource" name="resource" value="{node->cms:node.translate(propertyName:'resource')}"/>
+								<label for="figure">Figure</label>
+								<input type="file" accept="image/*" class="form-control" id="figure" name="figure" value="{node->cms:node.translate(propertyName:'figure')}"/>
+							</div>
+						</f:else>
+					</f:if>
+				</dis:validation.validationResults>
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="caption">
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<div class="form-group has-error">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+										<label for="caption">Caption</label>
+										<textarea class="form-control" id="caption" name="caption" rows="10"
+												  placeholder="Having some caption for this image?">{validationResult.source}</textarea>
+									</f:if>
+									<label class="validation-property-error" for="caption">{validationResult}</label>
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="form-group">
+								<label for="caption">Caption</label>
+								<textarea class="form-control" id="caption" name="caption" rows="10"
+										  placeholder="Having some caption for this image?">{node->cms:node.translate(propertyName:'caption')}</textarea>
 							</div>
 						</f:else>
 					</f:if>
