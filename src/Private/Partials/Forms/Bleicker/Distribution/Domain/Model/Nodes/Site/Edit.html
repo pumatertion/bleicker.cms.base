@@ -8,7 +8,7 @@
 				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
-							<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
+							<div class="form-group has-error">
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 										<f:if condition="{0:iteration.cycle}=={0:1}">
 											<label for="title">Title</label>
@@ -20,7 +20,7 @@
 							</div>
 						</f:then>
 						<f:else>
-							<div class="form-group{f:if(condition:'{validationResults->f:count()}', then:' has-error')}">
+							<div class="form-group">
 								<label for="title">Title</label>
 								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
 									   placeholder="Please give the site a title"/>
