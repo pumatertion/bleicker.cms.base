@@ -3,6 +3,7 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Domain\Model\Nodes\Image;
 use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
 use Bleicker\Framework\Validation\ArrayValidator;
@@ -11,7 +12,6 @@ use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
 use Bleicker\Nodes\NodeTranslation;
-use Bleicker\Distribution\Domain\Model\Nodes\Image;
 use Bleicker\ObjectManager\ObjectManager;
 use Bleicker\Registry\Registry;
 use Bleicker\Translation\Translation;
@@ -62,10 +62,12 @@ class ImageTypeConverter extends AbstractTypeConverter {
 	 * @throws ValidationException
 	 * @return $this
 	 */
-	protected function validate(array $source = []){
-		$resourceNotEmptyValidator = new NotEmptyValidator();
+	protected function validate(array $source = []) {
+		$titleNotEmptyValidator = new NotEmptyValidator();
+		$altNotEmptyValidator = new NotEmptyValidator();
 		$validationResults = ArrayValidator::create()
-			->addValidatorForPropertyPath('resource', $resourceNotEmptyValidator)
+			->addValidatorForPropertyPath('title', $titleNotEmptyValidator)
+			->addValidatorForPropertyPath('alt', $altNotEmptyValidator)
 			->validate($source)
 			->getResults();
 		if ($validationResults->count() > 0) {
