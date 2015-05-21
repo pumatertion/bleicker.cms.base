@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @todo most of this has to be done in after call
- */
 include __DIR__ . '/Includes/Registry.php';
 include __DIR__ . '/Includes/Locales.php';
 include __DIR__ . '/Includes/Cache.php';
