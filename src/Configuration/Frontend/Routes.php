@@ -1,6 +1,6 @@
 <?php
 
-use Bleicker\Cms\Controller\NodeController;
+use Bleicker\Cms\Controller\Frontend\NodeController;
 use Bleicker\ObjectManager\ObjectManager;
 use Bleicker\Routing\ControllerRouteData;
 use Bleicker\Routing\RouteInterface;
