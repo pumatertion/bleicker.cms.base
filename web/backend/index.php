@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
+include __DIR__ . '/../../vendor/autoload.php';
 
 use Bleicker\Exception\ThrowableException;
 use Bleicker\Framework\ApplicationFactory;
@@ -12,10 +12,10 @@ $whoops->register();
 try {
 	ApplicationFactory::http(
 		function () {
-			include __DIR__ . '/../src/Configuration/Before.php';
+			include __DIR__ . '/../../src/Configuration/Backend/Before.php';
 		},
 		function () {
-			include __DIR__ . '/../src/Configuration/After.php';
+			include __DIR__ . '/../../src/Configuration/Backend/After.php';
 		}
 	)->run();
 } catch (Exception $exception) {
