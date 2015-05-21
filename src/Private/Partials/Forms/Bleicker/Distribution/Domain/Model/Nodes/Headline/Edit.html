@@ -1,20 +1,43 @@
-<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers"/>
+<fluid
+		xmlns:dis="Bleicker\Distribution\ViewHelpers"
+		xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<f:alias map="{systemLocale:'{cms:translation.systemLocale()}'}">
+		<form class="form" action="/{systemLocale}/nodemanager/update/{node.id}" method="post">
+			<fieldset>
+				<legend>Update headline properties</legend>
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<div class="form-group has-error">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+										<label for="title">Title</label>
+										<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
+											   placeholder="Please give the headline a title"/>
+									</f:if>
+									<label class="validation-property-error" for="title">{validationResult}</label>
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="form-group">
+								<label for="title">Title</label>
+								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
+									   placeholder="Please give the headline a title"/>
+							</div>
+						</f:else>
+					</f:if>
+				</dis:validation.validationResults>
+				<div class="form-group">
+					<label for="title">Subtitle</label>
+					<input class="form-control" type="text" id="subtitle" name="subtitle" value="{node->cms:node.translate(propertyName:'subtitle')}"
+						   placeholder="Please give the headline a subtitle"/>
+				</div>
+				<div class="form-group">
+					<f:render partial="Forms/Actions" arguments="{node:node}"/>
+				</div>
+			</fieldset>
+		</form>
+	</f:alias>
+</fluid>
 
-<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/update/{node.id}" method="post">
-	<fieldset>
-		<legend>Update headline properties</legend>
-		<div class="form-group">
-			<label for="title">Title</label>
-			<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
-				   placeholder="Please give the headline a title"/>
-		</div>
-		<div class="form-group">
-			<label for="title">Subtitle</label>
-			<input class="form-control" type="text" id="subtitle" name="subtitle" value="{node->cms:node.translate(propertyName:'subtitle')}"
-				   placeholder="Please give the headline a subtitle"/>
-		</div>
-		<div class="form-group">
-			<f:render partial="Forms/Actions" arguments="{node:node}"/>
-		</div>
-	</fieldset>
-</form>
