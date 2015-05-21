@@ -3,7 +3,10 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
+use Bleicker\Framework\Validation\ArrayValidator;
+use Bleicker\Framework\Validation\Exception\ValidationException;
 use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
@@ -49,9 +52,26 @@ class ImageTypeConverter extends AbstractTypeConverter {
 	 */
 	public function convert($source) {
 		if ($this->isUpdate($source)) {
-			return $this->getUpdated($source);
+			return $this->validate($source)->getUpdated($source);
 		}
 		return $this->getNew($source);
+	}
+
+	/**
+	 * @param array $source
+	 * @throws ValidationException
+	 * @return $this
+	 */
+	protected function validate(array $source = []){
+		$resourceNotEmptyValidator = new NotEmptyValidator();
+		$validationResults = ArrayValidator::create()
+			->addValidatorForPropertyPath('resource', $resourceNotEmptyValidator)
+			->validate($source)
+			->getResults();
+		if ($validationResults->count() > 0) {
+			throw ValidationException::create($validationResults, 'Validation failed', 1432156045);
+		}
+		return $this;
 	}
 
 	/**
