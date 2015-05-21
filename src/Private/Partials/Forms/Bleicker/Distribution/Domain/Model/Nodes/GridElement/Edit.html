@@ -11,7 +11,7 @@
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 										<label for="colspan">Colspan</label>
-										<input class="form-control" type="text" id="colspan" name="colspan" value="{validationResult.source}"
+										<input class="form-control" type="text" id="colspan" name="colspan" value="{validationResult.source->f:format.htmlspecialchars()}"
 											   placeholder="For example 6"/>
 									</f:if>
 									<label class="validation-property-error" for="colspan">{validationResult}</label>
@@ -21,7 +21,7 @@
 						<f:else>
 							<div class="form-group">
 								<label for="colspan">Colspan</label>
-								<input class="form-control" type="text" id="colspan" name="colspan" value="{node->cms:node.translate(propertyName:'colspan')}"
+								<input class="form-control" type="text" id="colspan" name="colspan" value="{node->cms:node.translate(propertyName:'colspan')->f:format.htmlspecialchars()}"
 									   placeholder="For example 6"/>
 							</div>
 						</f:else>
@@ -34,7 +34,7 @@
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 										<label for="offset">Offset</label>
-										<input class="form-control" type="text" id="offset" name="offset" value="{validationResult.source}"
+										<input class="form-control" type="text" id="offset" name="offset" value="{validationResult.source->f:format.htmlspecialchars()}"
 											   placeholder="For example 6"/>
 									</f:if>
 									<label class="validation-property-error" for="offset">{validationResult}</label>
@@ -44,7 +44,7 @@
 						<f:else>
 							<div class="form-group">
 								<label for="offset">Offset</label>
-								<input class="form-control" type="text" id="offset" name="offset" value="{node->cms:node.translate(propertyName:'offset')}"
+								<input class="form-control" type="text" id="offset" name="offset" value="{node->cms:node.translate(propertyName:'offset')->f:format.htmlspecialchars()}"
 									   placeholder="For example 6"/>
 							</div>
 						</f:else>

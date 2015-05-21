@@ -11,7 +11,7 @@
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 										<label for="title">Title</label>
-										<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
+										<input class="form-control" type="text" id="title" name="title" value="{validationResult.source->f:format.htmlspecialchars()}"
 											   placeholder="Please give the image a title"/>
 									</f:if>
 									<label class="validation-property-error" for="title">{validationResult}</label>
@@ -21,7 +21,7 @@
 						<f:else>
 							<div class="form-group">
 								<label for="title">Title</label>
-								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
+								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')->f:format.htmlspecialchars()}"
 									   placeholder="Please give the image a title"/>
 							</div>
 						</f:else>
@@ -34,7 +34,7 @@
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 										<label for="title">Alt</label>
-										<input class="form-control" type="text" id="alt" name="alt" value="{validationResult.source}"
+										<input class="form-control" type="text" id="alt" name="alt" value="{validationResult.source->f:format.htmlspecialchars()}"
 											   placeholder="Please give the image an alternative text"/>
 									</f:if>
 									<label class="validation-property-error" for="alt">{validationResult}</label>
@@ -44,7 +44,7 @@
 						<f:else>
 							<div class="form-group">
 								<label for="title">Alt</label>
-								<input class="form-control" type="text" id="alt" name="alt" value="{node->cms:node.translate(propertyName:'alt')}"
+								<input class="form-control" type="text" id="alt" name="alt" value="{node->cms:node.translate(propertyName:'alt')->f:format.htmlspecialchars()}"
 									   placeholder="Please give the image an alternative text"/>
 							</div>
 						</f:else>
@@ -57,7 +57,7 @@
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 											<label for="figure">Figure</label>
-											<input type="file" accept="image/*" class="form-control" id="figure" name="figure" value="{validationResult.source}"/>
+											<input type="file" accept="image/*" class="form-control" id="figure" name="figure" value="{validationResult.source->f:format.htmlspecialchars()}"/>
 									</f:if>
 									<label class="validation-property-error" for="figure">{validationResult}</label>
 								</f:for>
@@ -89,7 +89,7 @@
 							<div class="form-group">
 								<label for="caption">Caption</label>
 								<textarea class="form-control" id="caption" name="caption" rows="10"
-										  placeholder="Having some caption for this image?">{node->cms:node.translate(propertyName:'caption')}</textarea>
+										  placeholder="Having some caption for this image?">{node->cms:node.translate(propertyName:'caption')->f:format.htmlspecialchars()}</textarea>
 							</div>
 						</f:else>
 					</f:if>

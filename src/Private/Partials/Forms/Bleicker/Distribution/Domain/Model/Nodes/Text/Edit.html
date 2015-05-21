@@ -12,7 +12,7 @@
 									<f:if condition="{0:iteration.cycle}=={0:1}">
 										<label for="body">Body</label>
 										<textarea class="form-control" id="body" name="body" rows="10"
-												  placeholder="Please add your text">{validationResult.source}</textarea>
+												  placeholder="Please add your text">{validationResult.source->f:format.htmlspecialchars()}</textarea>
 									</f:if>
 									<label class="validation-property-error" for="body">{validationResult}</label>
 								</f:for>
@@ -22,7 +22,7 @@
 							<div class="form-group">
 								<label for="body">Body</label>
 								<textarea class="form-control" id="body" name="body" rows="10"
-										  placeholder="Please add your text">{node->cms:node.translate(propertyName:'body')}</textarea>
+										  placeholder="Please add your text">{node->cms:node.translate(propertyName:'body')->f:format.htmlspecialchars()}</textarea>
 							</div>
 						</f:else>
 					</f:if>
