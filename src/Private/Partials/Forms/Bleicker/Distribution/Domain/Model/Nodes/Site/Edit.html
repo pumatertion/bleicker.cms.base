@@ -10,12 +10,12 @@
 						<f:then>
 							<div class="form-group has-error">
 								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
-										<f:if condition="{0:iteration.cycle}=={0:1}">
-											<label for="title">Title</label>
-											<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
-												   placeholder="Please give the site a title"/>
-										</f:if>
-										<label class="validation-property-error" for="title">{validationResult}</label>
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+										<label for="title">Title</label>
+										<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
+											   placeholder="Please give the site a title"/>
+									</f:if>
+									<label class="validation-property-error" for="title">{validationResult}</label>
 								</f:for>
 							</div>
 						</f:then>
