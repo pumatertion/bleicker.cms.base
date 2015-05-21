@@ -1,5 +1,5 @@
-<fluid xmlns:dis="Bleicker\Distribution\ViewHelpers">
-	<dis:validation.validationResults results="{validationException.results}">
+<fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<cms:validation.validationResults results="{validationException.results}">
 		<f:if condition="{validationResults->f:count()}">
 			<div class="container-fluid">
 				<dl class="alert alert-danger alert-validation-results">
@@ -13,5 +13,5 @@
 				</dl>
 			</div>
 		</f:if>
-	</dis:validation.validationResults>
+	</cms:validation.validationResults>
 </fluid>

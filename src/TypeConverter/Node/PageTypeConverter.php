@@ -2,8 +2,9 @@
 
 namespace Bleicker\Distribution\TypeConverter\Node;
 
+use Bleicker\Cms\Validation\NotEmptyValidator;
 use Bleicker\Converter\AbstractTypeConverter;
-use Bleicker\Distribution\Validation\NotEmptyValidator;
+use Bleicker\Distribution\Domain\Model\Nodes\Page;
 use Bleicker\Framework\Utility\Arrays;
 use Bleicker\Framework\Validation\ArrayValidator;
 use Bleicker\Framework\Validation\Exception\ValidationException;
@@ -11,7 +12,6 @@ use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
 use Bleicker\Nodes\NodeTranslation;
-use Bleicker\Distribution\Domain\Model\Nodes\Page;
 use Bleicker\ObjectManager\ObjectManager;
 
 /**
@@ -59,7 +59,7 @@ class PageTypeConverter extends AbstractTypeConverter {
 	 * @throws ValidationException
 	 * @return $this
 	 */
-	protected function validate(array $source = []){
+	protected function validate(array $source = []) {
 		$notEmptyValidator = new NotEmptyValidator();
 		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
 		if ($validationResults->count() > 0) {

@@ -1,9 +1,9 @@
 <?php
 
+use Bleicker\Cms\TypeConverter\NodeLocaleTypeConverter;
 use Bleicker\Converter\TypeConverter\FloatTypeConverter;
 use Bleicker\Converter\TypeConverter\IntegerTypeConverter;
 use Bleicker\Converter\TypeConverter\StringTypeConverter;
-use Bleicker\Distribution\TypeConverter\NodeLocaleTypeConverter;
 use Bleicker\Distribution\TypeConverter\Node\GridElementTypeConverter;
 use Bleicker\Distribution\TypeConverter\Node\GridTypeConverter;
 use Bleicker\Distribution\TypeConverter\Node\HeadlineTypeConverter;

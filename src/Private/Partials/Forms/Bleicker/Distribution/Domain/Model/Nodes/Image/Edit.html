@@ -1,10 +1,9 @@
-<fluid xmlns:dis="Bleicker\Distribution\ViewHelpers"
-		xmlns:cms="Bleicker\Cms\ViewHelpers">
+<fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
 	<f:alias map="{systemLocale:'{cms:translation.systemLocale()}'}">
 		<form class="form" action="/{systemLocale}/nodemanager/update/{node.id}" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Update image properties</legend>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
+				<cms:validation.validationResults results="{validationException.results}" propertyPath="title">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
@@ -26,8 +25,8 @@
 							</div>
 						</f:else>
 					</f:if>
-				</dis:validation.validationResults>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="alt">
+				</cms:validation.validationResults>
+				<cms:validation.validationResults results="{validationException.results}" propertyPath="alt">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
@@ -49,8 +48,8 @@
 							</div>
 						</f:else>
 					</f:if>
-				</dis:validation.validationResults>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="figure">
+				</cms:validation.validationResults>
+				<cms:validation.validationResults results="{validationException.results}" propertyPath="figure">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
@@ -70,8 +69,8 @@
 							</div>
 						</f:else>
 					</f:if>
-				</dis:validation.validationResults>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="caption">
+				</cms:validation.validationResults>
+				<cms:validation.validationResults results="{validationException.results}" propertyPath="caption">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
@@ -93,7 +92,7 @@
 							</div>
 						</f:else>
 					</f:if>
-				</dis:validation.validationResults>
+				</cms:validation.validationResults>
 				<div class="form-group">
 					<f:render partial="Forms/Actions" arguments="{node:node}"/>
 				</div>

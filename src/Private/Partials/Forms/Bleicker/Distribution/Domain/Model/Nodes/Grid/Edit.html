@@ -1,10 +1,10 @@
-<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers"/>
-
-<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/update/{node.id}" method="post">
-	<fieldset>
-		<legend>Edit grid</legend>
-	</fieldset>
-	<div class="form-group">
-		<f:render partial="Forms/Actions" arguments="{node:node}"/>
-	</div>
-</form>
+<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/update/{node.id}" method="post">
+		<fieldset>
+			<legend>Edit grid</legend>
+		</fieldset>
+		<div class="form-group">
+			<f:render partial="Forms/Actions" arguments="{node:node}"/>
+		</div>
+	</form>
+</f:fluid>

@@ -2,9 +2,9 @@
 
 namespace Bleicker\Distribution\TypeConverter\Node;
 
+use Bleicker\Cms\Validation\NotEmptyValidator;
 use Bleicker\Converter\AbstractTypeConverter;
 use Bleicker\Distribution\Domain\Model\Nodes\Text;
-use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
 use Bleicker\Framework\Validation\ArrayValidator;
 use Bleicker\Framework\Validation\Exception\ValidationException;

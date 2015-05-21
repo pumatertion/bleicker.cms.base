@@ -1,10 +1,9 @@
-<fluid xmlns:dis="Bleicker\Distribution\ViewHelpers"
-		xmlns:cms="Bleicker\Cms\ViewHelpers">
+<fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
 	<f:alias map="{systemLocale:'{cms:translation.systemLocale()}'}">
 		<form class="form" action="/{systemLocale}/nodemanager/update/{node.id}" method="post">
 			<fieldset>
 				<legend>Update page properties</legend>
-				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
+				<cms:validation.validationResults results="{validationException.results}" propertyPath="title">
 					<f:if condition="{validationResults->f:count()}">
 						<f:then>
 							<div class="form-group has-error">
@@ -26,7 +25,7 @@
 							</div>
 						</f:else>
 					</f:if>
-				</dis:validation.validationResults>
+				</cms:validation.validationResults>
 			</fieldset>
 			<div class="form-group">
 				<f:render partial="Forms/Actions" arguments="{node:node}"/>

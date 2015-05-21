@@ -1,6 +1,6 @@
 <f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers"/>
 
-<f:alias map="{configurations: '{node->cms:possibleChildrenConfigurations()}'}">
+<f:alias map="{configurations: '{node->cms:node.possibleChildrenConfigurations()}'}">
 	<f:if condition="{configurations->f:count()}">
 		<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/add/{node.id}" method="post">
 			<fieldset>
@@ -15,7 +15,7 @@
 		</form>
 	</f:if>
 </f:alias>
-<f:alias map="{configurations: '{node.parent->cms:possibleChildrenConfigurations()}'}">
+<f:alias map="{configurations: '{node.parent->cms:node.possibleChildrenConfigurations()}'}">
 	<f:if condition="{configurations->f:count()}">
 		<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/add/{node.id}" method="post">
 			<fieldset>

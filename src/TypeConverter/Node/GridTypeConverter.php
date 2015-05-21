@@ -3,10 +3,10 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Domain\Model\Nodes\Grid;
 use Bleicker\Framework\Utility\Arrays;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
-use Bleicker\Distribution\Domain\Model\Nodes\Grid;
 use Bleicker\ObjectManager\ObjectManager;
 
 /**
