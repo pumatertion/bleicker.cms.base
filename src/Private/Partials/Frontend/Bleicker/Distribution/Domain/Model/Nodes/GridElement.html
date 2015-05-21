@@ -1,0 +1,5 @@
+<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<div class="node gridelement col-sm-{node->cms:node.translate(propertyName:'colspan')} col-sm-offset-{node->cms:node.translate(propertyName:'offset')}">
+		<f:render partial="ContentTree" arguments="{of:node, current:current}"/>
+	</div>
+</f:fluid>

@@ -10,7 +10,8 @@ module.exports = function(grunt) {
 					sourcemap: 'none'
 				},
 				files: {
-					"src/Public/Styles/Site.css": "src/Private/Styles/Site.scss"
+					"src/Public/Styles/Frontend.css": "src/Private/Styles/Frontend.scss",
+					"src/Public/Styles/Backend.css": "src/Private/Styles/Backend.scss"
 				}
 			}
 		},
@@ -39,13 +40,21 @@ module.exports = function(grunt) {
 			options: {
 				separator: ';'
 			},
-			dist: {
+			backend: {
 				src: [
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-					'src/Private/JavaScript/Cms.js'
+					'src/Private/JavaScript/Backend.js'
 				],
-				dest: 'src/Public/JavaScript/Built.js'
+				dest: 'src/Public/JavaScript/Backend.js'
+			},
+			frontend: {
+				src: [
+					'bower_components/jquery/dist/jquery.js',
+					'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+					'src/Private/JavaScript/Frontend.js'
+				],
+				dest: 'src/Public/JavaScript/Frontend.js'
 			}
 		}
 	});

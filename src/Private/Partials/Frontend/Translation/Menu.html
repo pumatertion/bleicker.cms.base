@@ -1,0 +1,14 @@
+<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<div class="translation-menu">
+		<f:for each="{cms:translation.possibleTranslations()}" as="locale" key="alias">
+			<f:if condition="{locale} == {cms:translation.systemLocale()}">
+				<f:then>
+					<a class="btn btn-primary btn-xs" href="/{locale}/{node.id}">{alias}</a>
+				</f:then>
+				<f:else>
+					<a class="btn btn-default btn-xs" href="/{locale}/{node.id}">{alias}</a>
+				</f:else>
+			</f:if>
+		</f:for>
+	</div>
+</f:fluid>

@@ -8,7 +8,9 @@ use Bleicker\Routing\RouterInterface;
 
 /** @var RouterInterface $router */
 $router = ObjectManager::get(RouterInterface::class);
-$router->addRoute('/', 'get', new ControllerRouteData(NodeController::class, 'indexAction'));
+$router
+	->addRoute('/', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
+	->addRoute('/{node}', 'get', new ControllerRouteData(NodeController::class, 'showAction'));
 
 /**
  * Prefix every registered route with /{systemLocale}

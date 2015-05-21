@@ -1,0 +1,18 @@
+<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<figure class="node image container-fluid">
+		<img class="img-responsive" src="/Uploads/{node->cms:node.translate(propertyName:'figure')}"
+			 title="{node->cms:node.translate(propertyName:'title')->f:format.htmlspecialchars()}"
+			 alt="{node->cms:node.translate(propertyName:'alt')->f:format.htmlspecialchars()}"/>
+		<f:if condition="{node.caption}">
+			<figcaption>
+				<cms:format.nl2br>
+					<f:format.raw>
+						<cms:format.nodeTagParser prefix="/{cms:translation.systemLocale()}/nodemanager/">
+							<cms:node.translate propertyName="caption" node="{node}"/>
+						</cms:format.nodeTagParser>
+					</f:format.raw>
+				</cms:format.nl2br>
+			</figcaption>
+		</f:if>
+	</figure>
+</f:fluid>
