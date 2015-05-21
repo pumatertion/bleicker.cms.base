@@ -3,11 +3,11 @@
 namespace Bleicker\Distribution\ViewHelpers\Validation;
 
 use Bleicker\Framework\Validation\MessageInterface;
+use Bleicker\Framework\Validation\ResultCollectionInterface;
 use Bleicker\Framework\Validation\ResultInterface;
 use Bleicker\Framework\Validation\ResultsInterface;
-use Bleicker\ObjectManager\ObjectManager;
 use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
-use Bleicker\Framework\Validation\ResultCollectionInterface;
+
 /**
  * Class ValidationResultsViewHelper
  *
@@ -55,11 +55,11 @@ class ValidationResultsViewHelper extends AbstractViewHelper {
 		$propertyPath = $this->arguments['propertyPath'];
 		/** @var ResultCollectionInterface $validationResults */
 		$validationResults = $this->arguments['results'];
-		if(!($validationResults instanceof ResultCollectionInterface)){
+		if (!($validationResults instanceof ResultCollectionInterface)) {
 			return NULL;
 		}
 		if ($propertyPath !== NULL) {
-			$validationResults = $validationResults->filter(function(MessageInterface $message) use ($propertyPath){
+			$validationResults = $validationResults->filter(function (MessageInterface $message) use ($propertyPath) {
 				return $propertyPath === $message->getPropertyPath();
 			});
 		}
