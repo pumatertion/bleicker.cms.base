@@ -2,7 +2,7 @@
 
 namespace Bleicker\Distribution\TypeConverter\Node;
 
-use Bleicker\Cms\Validation\NotEmptyValidator;
+use Bleicker\Cms\Validation\Validators\NotEmptyValidator;
 use Bleicker\Converter\AbstractTypeConverter;
 use Bleicker\Distribution\Domain\Model\Nodes\GridElement;
 use Bleicker\Framework\Utility\Arrays;
