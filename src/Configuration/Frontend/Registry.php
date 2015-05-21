@@ -14,9 +14,9 @@ Registry::set('paths.doctrine.schema.account', Registry::get('paths.root') . '/v
 Registry::set('paths.doctrine.schema.nodestypes', Registry::get('paths.root') . '/src/Domain/Schema');
 
 /** Fluid Paths */
-Registry::set('paths.typo3.fluid.templateRootPaths.default', Registry::get('paths.root') . '/src/Private/Frontend/Templates/');
-Registry::set('paths.typo3.fluid.layoutRootPaths.default', Registry::get('paths.root') . '/src/Private/Frontend/Layouts/');
-Registry::set('paths.typo3.fluid.partialRootPaths.default', Registry::get('paths.root') . '/src/Private/Frontend/Partials/');
+Registry::set('paths.typo3.fluid.templateRootPaths.default', Registry::get('paths.root') . '/src/Private/Templates/');
+Registry::set('paths.typo3.fluid.layoutRootPaths.default', Registry::get('paths.root') . '/src/Private/Layouts/');
+Registry::set('paths.typo3.fluid.partialRootPaths.default', Registry::get('paths.root') . '/src/Private/Partials/');
 
 /** Cache Paths */
 Registry::set('paths.cache.default', Registry::get('paths.root') . '/.resources/cache');
