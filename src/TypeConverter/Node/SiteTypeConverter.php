@@ -52,11 +52,11 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 */
 	public function convert($source) {
 		$notEmptyValidator = new NotEmptyValidator();
-		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
-		if ($validationResults->count() > 0) {
-			throw ValidationException::create($validationResults, 'Validation failed', 1432156044);
-		}
 		if ($this->isUpdate($source)) {
+			$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
+			if ($validationResults->count() > 0) {
+				throw ValidationException::create($validationResults, 'Validation failed', 1432156044);
+			}
 			return $this->getUpdated($source);
 		}
 		return $this->getNew($source);
