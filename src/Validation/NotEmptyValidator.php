@@ -23,7 +23,7 @@ class NotEmptyValidator extends AbstractValidator {
 			$message = new Message('Null is not allowed', 1432036800, $source);
 			$this->results->add($message);
 		}
-		if (empty($source)) {
+		if (trim($source) === '') {
 			$message = new Message('Empty values not allowed', 1432036801, $source);
 			$this->results->add($message);
 		}
