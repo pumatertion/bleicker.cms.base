@@ -68,7 +68,7 @@ class GridElementTypeConverter extends AbstractTypeConverter {
 			->validate($source)
 			->getResults();
 		if ($validationResults->count() > 0) {
-			throw ValidationException::create($validationResults, 'Validation failed', 1432156045);
+			throw ValidationException::create($validationResults, 'Validation failed', 1432198837);
 		}
 		return $this;
 	}
