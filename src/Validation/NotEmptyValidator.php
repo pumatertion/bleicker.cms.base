@@ -19,12 +19,8 @@ class NotEmptyValidator extends AbstractValidator {
 	 * @return $this
 	 */
 	public function validate($source = NULL) {
-		if ($source === NULL) {
-			$message = new Message('Null is not allowed', 1432036800, $source);
-			$this->results->add($message);
-		}
-		if (trim($source) === '') {
-			$message = new Message('Empty values not allowed', 1432036801, $source);
+		if ($source === NULL || trim($source) === '') {
+			$message = new Message('This is required.', 1432036801, $source);
 			$this->results->add($message);
 		}
 		return $this;
