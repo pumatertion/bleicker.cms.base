@@ -3,7 +3,10 @@
 namespace Bleicker\Distribution\TypeConverter\Node;
 
 use Bleicker\Converter\AbstractTypeConverter;
+use Bleicker\Distribution\Validation\NotEmptyValidator;
 use Bleicker\Framework\Utility\Arrays;
+use Bleicker\Framework\Validation\ArrayValidator;
+use Bleicker\Framework\Validation\Exception\ValidationException;
 use Bleicker\Nodes\Locale;
 use Bleicker\Nodes\NodeService;
 use Bleicker\Nodes\NodeServiceInterface;
@@ -46,9 +49,23 @@ class HeadlineTypeConverter extends AbstractTypeConverter {
 	 */
 	public function convert($source) {
 		if ($this->isUpdate($source)) {
-			return $this->getUpdated($source);
+			return $this->validate($source)->getUpdated($source);
 		}
 		return $this->getNew($source);
+	}
+
+	/**
+	 * @param array $source
+	 * @throws ValidationException
+	 * @return $this
+	 */
+	protected function validate(array $source = []){
+		$notEmptyValidator = new NotEmptyValidator();
+		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
+		if ($validationResults->count() > 0) {
+			throw ValidationException::create($validationResults, 'Validation failed', 1432156045);
+		}
+		return $this;
 	}
 
 	/**
@@ -86,7 +103,7 @@ class HeadlineTypeConverter extends AbstractTypeConverter {
 		$node = new Headline();
 		$node->setTitle(Arrays::getValueByPath($source, 'title') !== NULL ? : '');
 		$node->setSubtitle(Arrays::getValueByPath($source, 'subtitle'));
-
+		$node->setHidden(TRUE);
 		return $node;
 	}
 
@@ -100,17 +117,13 @@ class HeadlineTypeConverter extends AbstractTypeConverter {
 		if ($this->isLocalizationMode()) {
 			return $this->getLocalized($source);
 		}
-
 		$nodeId = Arrays::getValueByPath($source, $this->getIdPath());
 		Arrays::unsetValueByPath($source, $this->getIdPath());
-
 		/** @var Headline $node */
 		$node = $this->nodeService->get($nodeId);
-
 		$node->setTitle(Arrays::getValueByPath($source, 'title'));
 		$node->setSubtitle(Arrays::getValueByPath($source, 'subtitle'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
-
 		return $node;
 	}
 
@@ -121,16 +134,12 @@ class HeadlineTypeConverter extends AbstractTypeConverter {
 	protected function getLocalized(array $source) {
 		$nodeId = Arrays::getValueByPath($source, $this->getIdPath());
 		Arrays::unsetValueByPath($source, $this->getIdPath());
-
 		/** @var Headline $node */
 		$node = $this->nodeService->get($nodeId);
-
 		$titleTranslation = new NodeTranslation('title', $this->getNodeLocale(), Arrays::getValueByPath($source, 'title'));
 		$this->nodeService->addTranslation($node, $titleTranslation->setNode($node));
-
 		$subtitleTranslation = new NodeTranslation('subtitle', $this->getNodeLocale(), Arrays::getValueByPath($source, 'subtitle'));
 		$this->nodeService->addTranslation($node, $subtitleTranslation->setNode($node));
-
 		return $node;
 	}
 

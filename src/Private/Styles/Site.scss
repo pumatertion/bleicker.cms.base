@@ -49,14 +49,28 @@ body {
   overflow-y: scroll;
 }
 
+.validation-property-error {
+  font-weight: normal;
+  color: $alert-danger-text;
+  padding: $padding-base-horizontal/2 $padding-base-horizontal 0 $padding-base-horizontal;
+  margin: 0;
+  display: block;
+}
+
+.alert-validation-results {
+  dt {
+    font-size: $font-size-h3;
+  }
+}
+
 .btn {
   margin-bottom: $grid-gutter-width/4;
 }
 
 .col-first {
   margin-top: $grid-gutter-width/2;
-  section{
-    &.page-tree{
+  section {
+    &.page-tree {
       margin-bottom: $grid-gutter-width/3;
     }
   }
@@ -79,7 +93,7 @@ body {
       &.hidden {
         display: block !important;
         opacity: 0.4;
-        &.active{
+        &.active {
           opacity: 0.85;
         }
       }
@@ -107,7 +121,7 @@ body {
   &.hidden {
     display: block !important;
     opacity: 0.5;
-    &.active{
+    &.active {
       opacity: 0.85;
     }
   }
@@ -154,7 +168,7 @@ body {
     &.hidden {
       display: block !important;
       opacity: 0.5;
-      &.active{
+      &.active {
         opacity: 0.85;
       }
     }

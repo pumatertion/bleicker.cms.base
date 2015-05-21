@@ -1,8 +1,5 @@
 <?php
 
-use Bleicker\Nodes\Configuration\NodeConfigurationInterface;
-use Bleicker\Nodes\ContentNodeInterface;
-use Bleicker\Nodes\PageNodeInterface;
 use Bleicker\Distribution\Domain\Model\Nodes\Grid;
 use Bleicker\Distribution\Domain\Model\Nodes\GridElement;
 use Bleicker\Distribution\Domain\Model\Nodes\GridElementInterface;
@@ -12,6 +9,9 @@ use Bleicker\Distribution\Domain\Model\Nodes\Page;
 use Bleicker\Distribution\Domain\Model\Nodes\Section;
 use Bleicker\Distribution\Domain\Model\Nodes\Site;
 use Bleicker\Distribution\Domain\Model\Nodes\Text;
+use Bleicker\Nodes\Configuration\NodeConfigurationInterface;
+use Bleicker\Nodes\ContentNodeInterface;
+use Bleicker\Nodes\PageNodeInterface;
 
 /** Register Sites and allow child types */
 Site::register('Website', 'The root page of a domain', NodeConfigurationInterface::SITE_GROUP)

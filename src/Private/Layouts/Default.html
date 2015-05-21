@@ -11,6 +11,8 @@
 
 <f:render section="navigation" optional="true"/>
 
+<f:render partial="Validation/ValidationResults" arguments="{validationException:validationException}"/>
+
 <div class="container-fluid">
 	<f:render section="docBody"/>
 </div>

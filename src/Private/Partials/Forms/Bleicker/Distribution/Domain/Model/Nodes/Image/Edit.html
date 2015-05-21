@@ -1,25 +1,80 @@
-<f:fluid xmlns:cms="Bleicker\Cms\ViewHelpers"/>
-
-<form class="form" action="/{cms:translation.systemLocale()}/nodemanager/update/{node.id}" method="post" enctype="multipart/form-data">
-	<fieldset>
-		<legend>Update image properties</legend>
-		<div class="form-group">
-			<label for="title">Title</label>
-			<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
-				   placeholder="Please give the image a title"/>
-		</div>
-		<div class="form-group">
-			<label for="title">Alt</label>
-			<input class="form-control" type="text" id="alt" name="alt" value="{node->cms:node.translate(propertyName:'alt')}"
-				   placeholder="Please give the image an alternative text"/>
-		</div>
-		<div class="form-group">
-			<label for="title">Resource</label>
-			<input type="file" accept="image/*" class="form-control" id="resource" name="resource" value="{node->cms:node.translate(propertyName:'resource')}"
-				   placeholder="Please give the image an alternative text"/>
-		</div>
-		<div class="form-group">
-			<f:render partial="Forms/Actions" arguments="{node:node}"/>
-		</div>
-	</fieldset>
-</form>
+<fluid xmlns:dis="Bleicker\Distribution\ViewHelpers"
+		xmlns:cms="Bleicker\Cms\ViewHelpers">
+	<f:alias map="{systemLocale:'{cms:translation.systemLocale()}'}">
+		<form class="form" action="/{systemLocale}/nodemanager/update/{node.id}" method="post" enctype="multipart/form-data">
+			<fieldset>
+				<legend>Update image properties</legend>
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="title">
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<div class="form-group has-error">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+										<label for="title">Title</label>
+										<input class="form-control" type="text" id="title" name="title" value="{validationResult.source}"
+											   placeholder="Please give the image a title"/>
+									</f:if>
+									<label class="validation-property-error" for="title">{validationResult}</label>
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="form-group">
+								<label for="title">Title</label>
+								<input class="form-control" type="text" id="title" name="title" value="{node->cms:node.translate(propertyName:'title')}"
+									   placeholder="Please give the image a title"/>
+							</div>
+						</f:else>
+					</f:if>
+				</dis:validation.validationResults>
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="alt">
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<div class="form-group has-error">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+										<label for="title">Alt</label>
+										<input class="form-control" type="text" id="alt" name="alt" value="{validationResult.source}"
+											   placeholder="Please give the image an alternative text"/>
+									</f:if>
+									<label class="validation-property-error" for="alt">{validationResult}</label>
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="form-group">
+								<label for="title">Alt</label>
+								<input class="form-control" type="text" id="alt" name="alt" value="{node->cms:node.translate(propertyName:'alt')}"
+									   placeholder="Please give the image an alternative text"/>
+							</div>
+						</f:else>
+					</f:if>
+				</dis:validation.validationResults>
+				<dis:validation.validationResults results="{validationException.results}" propertyPath="resource">
+					<f:if condition="{validationResults->f:count()}">
+						<f:then>
+							<div class="form-group has-error">
+								<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+									<f:if condition="{0:iteration.cycle}=={0:1}">
+											<label for="title">Resource</label>
+											<input type="file" accept="image/*" class="form-control" id="resource" name="resource" value="{validationResult.source}"/>
+									</f:if>
+									<label class="validation-property-error" for="resource">{validationResult}</label>
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="form-group">
+								<label for="title">Resource</label>
+								<input type="file" accept="image/*" class="form-control" id="resource" name="resource" value="{node->cms:node.translate(propertyName:'resource')}"/>
+							</div>
+						</f:else>
+					</f:if>
+				</dis:validation.validationResults>
+				<div class="form-group">
+					<f:render partial="Forms/Actions" arguments="{node:node}"/>
+				</div>
+			</fieldset>
+		</form>
+	</f:alias>
+</fluid>

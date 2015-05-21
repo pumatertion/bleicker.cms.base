@@ -20,7 +20,7 @@
 		</div>
 		<div class="col-lg-3 col-third">
 			<f:render partial="Translation/Menu" arguments="{node:node}"/>
-			<f:render partial="Forms/{node.nodeType->cms:format.directory()}/Edit" arguments="{node:node}"/>
+			<f:render partial="Forms/{node.nodeType->cms:format.directory()}/Edit" arguments="{node:node, validationException: validationException}"/>
 			<f:render partial="Forms/Add" arguments="{node:node}"/>
 		</div>
 	</div>

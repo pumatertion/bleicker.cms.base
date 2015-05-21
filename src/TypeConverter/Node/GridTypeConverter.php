@@ -82,6 +82,7 @@ class GridTypeConverter extends AbstractTypeConverter {
 	 */
 	protected function getNew(array $source) {
 		$node = new Grid();
+		$node->setHidden(TRUE);
 		return $node;
 	}
 

@@ -28,7 +28,6 @@ $router
 	->addRoute('/nodemanager', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
 	->addRoute('/nodemanager/add', 'post', new ControllerRouteData(NodeController::class, 'addAction'))
 	->addRoute('/nodemanager/add/{reference}', 'post', new ControllerRouteData(NodeController::class, 'addWithReferenceAction'))
-	->addRoute('/nodemanager/save', 'post', new ControllerRouteData(NodeController::class, 'createAction'))
 	->addRoute('/nodemanager/update/{node}', 'post', new ControllerRouteData(NodeController::class, 'updateAction'))
 	->addRoute('/nodemanager/update/{node}', 'patch', new ControllerRouteData(NodeController::class, 'updateAction'))
 	->addRoute('/nodemanager/remove/{node}', 'delete', new ControllerRouteData(NodeController::class, 'removeAction'))
