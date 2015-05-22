@@ -4,42 +4,49 @@ use Bleicker\Cms\Controller\AuthenticationController;
 use Bleicker\Cms\Controller\NodeController;
 use Bleicker\Cms\Controller\SetupController;
 use Bleicker\ObjectManager\ObjectManager;
-use Bleicker\Routing\ControllerRouteData;
-use Bleicker\Routing\RouteInterface;
 use Bleicker\Routing\RouterInterface;
 
 /** @var RouterInterface $router */
 $router = ObjectManager::get(RouterInterface::class);
 $router
-	->addRoute('/', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
-	->addRoute('/setup', 'get', new ControllerRouteData(SetupController::class, 'setupAction'))
-	->addRoute('/setup/token', 'get', new ControllerRouteData(SetupController::class, 'newTokenAction'))
-	->addRoute('/setup/token', 'post', new ControllerRouteData(SetupController::class, 'createTokenAction'))
-	->addRoute('/setup/database', 'get', new ControllerRouteData(SetupController::class, 'setupDatabaseAction'))
-	->addRoute('/setup/database', 'post', new ControllerRouteData(SetupController::class, 'createDatabaseAction'))
-	->addRoute('/setup/schema', 'post', new ControllerRouteData(SetupController::class, 'createSchemaAction'))
-	->addRoute('/setup/admin', 'get', new ControllerRouteData(SetupController::class, 'setupAdministratorAction'))
-	->addRoute('/setup/admin', 'post', new ControllerRouteData(SetupController::class, 'createAdministratorAction'))
-	->addRoute('/setup/authentication', 'get', new ControllerRouteData(SetupController::class, 'authenticationAction'))
-	->addRoute('/setup/authentication', 'post', new ControllerRouteData(SetupController::class, 'setupAction'))
-	->addRoute('/logout', 'get', new ControllerRouteData(AuthenticationController::class, 'logoutAction'))
-	->addRoute('/authenticate', 'get', new ControllerRouteData(AuthenticationController::class, 'indexAction'))
-	->addRoute('/authenticate', 'post', new ControllerRouteData(AuthenticationController::class, 'authenticateAction'))
-	->addRoute('/nodemanager', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
-	->addRoute('/nodemanager/add', 'post', new ControllerRouteData(NodeController::class, 'addAction'))
-	->addRoute('/nodemanager/add/{reference}', 'post', new ControllerRouteData(NodeController::class, 'addWithReferenceAction'))
-	->addRoute('/nodemanager/update/{node}', 'post', new ControllerRouteData(NodeController::class, 'updateAction'))
-	->addRoute('/nodemanager/update/{node}', 'patch', new ControllerRouteData(NodeController::class, 'updateAction'))
-	->addRoute('/nodemanager/remove/{node}', 'delete', new ControllerRouteData(NodeController::class, 'removeAction'))
-	->addRoute('/nodemanager/remove/{node}', 'get', new ControllerRouteData(NodeController::class, 'removeAction'))
-	->addRoute('/nodemanager/{node}', 'get', new ControllerRouteData(NodeController::class, 'showAction'));
+
+	/**
+	 * SetupController Routes
+	 */
+	->addRoute(SetupController::class, 'setupAction', '/setup', 'get')
+	->addRoute(SetupController::class, 'newTokenAction', '/setup/token', 'get')
+	->addRoute(SetupController::class, 'createTokenAction', '/setup/token', 'post')
+	->addRoute(SetupController::class, 'setupDatabaseAction', '/setup/database', 'get')
+	->addRoute(SetupController::class, 'createDatabaseAction', '/setup/database', 'post')
+	->addRoute(SetupController::class, 'createSchemaAction', '/setup/schema', 'post')
+	->addRoute(SetupController::class, 'setupAdministratorAction', '/setup/admin', 'get')
+	->addRoute(SetupController::class, 'createAdministratorAction', '/setup/admin', 'post')
+	->addRoute(SetupController::class, 'authenticationAction', '/setup/authentication', 'get')
+	->addRoute(SetupController::class, 'setupAction', '/setup/authentication', 'post')
+
+	/**
+	 * AuthenticationController Routes
+	 */
+	->addRoute(AuthenticationController::class, 'logoutAction', '/logout', 'get')
+	->addRoute(AuthenticationController::class, 'indexAction', '/authenticate', 'get')
+	->addRoute(AuthenticationController::class, 'authenticateAction', '/authenticate', 'post')
+
+	/**
+	 * NodeController Routes
+	 */
+	->addRoute(NodeController::class, 'indexAction', '/', 'get')
+	->addRoute(NodeController::class, 'indexAction', '/nodemanager', 'get')
+	->addRoute(NodeController::class, 'addAction', '/nodemanager/add', 'post')
+	->addRoute(NodeController::class, 'addWithReferenceAction', '/nodemanager/add/{reference}', 'post')
+	->addRoute(NodeController::class, 'updateAction', '/nodemanager/update/{node}', 'post')
+	->addRoute(NodeController::class, 'updateAction', '/nodemanager/update/{node}', 'patch')
+	->addRoute(NodeController::class, 'removeAction', '/nodemanager/remove/{node}', 'delete')
+	->addRoute(NodeController::class, 'removeAction', '/nodemanager/remove/{node}', 'get')
+	->addRoute(NodeController::class, 'showAction', '/nodemanager/{node}', 'get');
 
 /**
  * Prefix every registered route with /{systemLocale}
  */
-$router->dispatchClosure(function (RouterInterface $router) {
-	/** @var RouteInterface $route */
-	foreach ($router->getRoutes() as $route) {
-		$router->addRoute('/{systemLocale}' . $route->getPattern(), $route->getMethod(), $route->getData());
-	}
-});
+foreach ($router->getRoutes() as $route) {
+	$router->addRoute($route->getClassName(), $route->getMethodName(), '/{systemLocale}' . $route->getPattern(), $route->getMethod());
+}

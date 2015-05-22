@@ -2,22 +2,17 @@
 
 use Bleicker\Cms\Controller\Frontend\NodeController;
 use Bleicker\ObjectManager\ObjectManager;
-use Bleicker\Routing\ControllerRouteData;
-use Bleicker\Routing\RouteInterface;
 use Bleicker\Routing\RouterInterface;
 
 /** @var RouterInterface $router */
 $router = ObjectManager::get(RouterInterface::class);
 $router
-	->addRoute('/', 'get', new ControllerRouteData(NodeController::class, 'indexAction'))
-	->addRoute('/{node}', 'get', new ControllerRouteData(NodeController::class, 'showAction'));
+	->addRoute(NodeController::class, 'indexAction', '/', 'get')
+	->addRoute(NodeController::class, 'showAction', '/{node}', 'get');
 
 /**
  * Prefix every registered route with /{systemLocale}
  */
-$router->dispatchClosure(function (RouterInterface $router) {
-	/** @var RouteInterface $route */
-	foreach ($router->getRoutes() as $route) {
-		$router->addRoute('/{systemLocale}' . $route->getPattern(), $route->getMethod(), $route->getData());
-	}
-});
+foreach ($router->getRoutes() as $route) {
+	$router->addRoute($route->getClassName(), $route->getMethodName(), '/{systemLocale}' . $route->getPattern(), $route->getMethod());
+}
