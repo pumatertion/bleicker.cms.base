@@ -1,5 +1,5 @@
 // Core variables and mixins
-@import "variables";
+@import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 // Reset and dependencies
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
@@ -33,7 +33,7 @@
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/panels";
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
-@import "wells";
+@import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/wells";
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/close";
 // Components w/ JavaScript
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/modals";
@@ -45,7 +45,7 @@
 @import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
 body {
-  padding: $padding-base-vertical $padding-base-horizontal;
+  padding: $padding-base-horizontal;
   overflow-y: scroll;
 }
 
@@ -53,6 +53,31 @@ figure{
   figcaption{
     padding: $padding-base-vertical 0;
   }
+}
+
+img{
+  &.img-responsive{
+    width: 100%;
+    height: auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+header {
+  margin: 0;
+  padding: 0 0 $padding-base-vertical 0;
+  h2 {
+    font-style: italic;
+    font-weight: normal;
+    margin-top: $padding-base-vertical;
+  }
+}
+
+.grid{
+  @extend .row;
 }
 
 .validation-property-error {
@@ -125,34 +150,6 @@ figure{
 .section-title {
   text-transform: uppercase;
   color: $gray-light;
-}
-
-.col-second {
-  &.hidden {
-    display: block !important;
-    opacity: 0.5;
-    &.active {
-      opacity: 0.85;
-    }
-  }
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-  }
-  header {
-    margin: 0;
-    padding: 0;
-    h2 {
-      font-style: italic;
-      font-weight: normal;
-      margin-top: 0.5em
-    }
-  }
-  .node {
-    position: relative;
-    margin: 0;
-    padding: 0;
-  }
 }
 
 .translation-menu {
