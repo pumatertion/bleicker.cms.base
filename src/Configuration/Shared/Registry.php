@@ -21,6 +21,15 @@ Registry::set('paths.typo3.fluid.partialRootPaths.default', Registry::get('paths
 /** Cache Paths */
 Registry::set('paths.cache.default', Registry::get('paths.root') . '/.resources/cache');
 
+/** Routing Cache Paths */
+Registry::set('paths.cache.routing', Registry::get('paths.cache.default') . '/routing');
+
+/** Routing Cache Paths */
+Registry::set('paths.cache.doctrine', Registry::get('paths.cache.default') . '/doctrine');
+
+/** Routing Cache Paths */
+Registry::set('paths.cache.fluid', Registry::get('paths.cache.default') . '/typo3.fluid');
+
 /** Uploads Paths */
 Registry::set('paths.uploads.default', Registry::get('paths.root') . '/.resources/uploads');
 

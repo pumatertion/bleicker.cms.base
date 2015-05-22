@@ -13,14 +13,14 @@ use TYPO3\Fluid\Core\Cache\SimpleFileCache;
  */
 if (Context::get(Context::APPLICATION_CONTEXT) === Context::PRODUCTION) {
 	ObjectManager::add(FluidCacheInterface::class, function () {
-		$fluidCache = new SimpleFileCache(Registry::get('paths.cache.default') . '/typo3.fluid');
+		$fluidCache = new SimpleFileCache(Registry::get('paths.cache.fluid'));
 		ObjectManager::add(FluidCacheInterface::class, $fluidCache, TRUE);
 		return $fluidCache;
 	});
 }
 
 ObjectManager::add(Cache::class, function () {
-	$doctrineCache = new FilesystemCache(Registry::get('paths.cache.default') . '/doctrine');
+	$doctrineCache = new FilesystemCache(Registry::get('paths.cache.doctrine'));
 	ObjectManager::add(Cache::class, $doctrineCache, TRUE);
 	return $doctrineCache;
 });
