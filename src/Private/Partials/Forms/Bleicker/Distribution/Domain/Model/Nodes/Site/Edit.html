@@ -26,6 +26,31 @@
 						</f:else>
 					</f:if>
 				</cms:validation.validationResults>
+				<f:if condition="{cms:translation.isLocalizationMode()}=={false}">
+					<cms:validation.validationResults results="{validationException.results}" propertyPath="domain">
+						<f:if condition="{validationResults->f:count()}">
+							<f:then>
+								<div class="form-group has-error">
+									<f:for each="{validationResults}" as="validationResult" iteration="iteration">
+										<f:if condition="{0:iteration.cycle}=={0:1}">
+											<label for="domain">Domain</label>
+											<input class="form-control" type="text" id="domain" name="domain" value="{validationResult.source->f:format.htmlspecialchars()}"
+												   placeholder="Please give the site a domain"/>
+										</f:if>
+										<label class="validation-property-error" for="domain">{validationResult}</label>
+									</f:for>
+								</div>
+							</f:then>
+							<f:else>
+								<div class="form-group">
+									<label for="domain">Domain</label>
+									<input class="form-control" type="text" id="domain" name="domain" value="{node->cms:node.translate(propertyName:'domain')->f:format.htmlspecialchars()}"
+										   placeholder="Please give the site a domain"/>
+								</div>
+							</f:else>
+						</f:if>
+					</cms:validation.validationResults>
+				</f:if>
 			</fieldset>
 			<div class="form-group">
 				<f:render partial="Forms/Actions" arguments="{node:node}"/>

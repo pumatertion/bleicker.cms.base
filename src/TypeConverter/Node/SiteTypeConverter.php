@@ -61,8 +61,8 @@ class SiteTypeConverter extends AbstractTypeConverter {
 	 * @return $this
 	 */
 	protected function validate(array $source = []) {
-		$notEmptyValidator = new NotEmptyValidator();
-		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $notEmptyValidator)->validate($source)->getResults();
+		$titleNotEmptyValidator = new NotEmptyValidator();
+		$validationResults = ArrayValidator::create()->addValidatorForPropertyPath('title', $titleNotEmptyValidator)->validate($source)->getResults();
 		if ($validationResults->count() > 0) {
 			throw ValidationException::create($validationResults, 'Validation failed', 1432156044);
 		}
@@ -122,6 +122,7 @@ class SiteTypeConverter extends AbstractTypeConverter {
 		/** @var Site $node */
 		$node = $this->nodeService->get($nodeId);
 		$node->setTitle(Arrays::getValueByPath($source, 'title'));
+		$node->setDomain(Arrays::getValueByPath($source, 'domain'));
 		$node->setHidden((boolean)Arrays::getValueByPath($source, 'hidden'));
 		return $node;
 	}
