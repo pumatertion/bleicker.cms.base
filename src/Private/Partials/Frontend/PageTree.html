@@ -9,7 +9,7 @@
 					</f:if>
 				</a>
 				<f:for each="{children}" as="child">
-					<f:render partial="PageTree" arguments="{of:child, current:current}"/>
+					<f:render partial="Frontend/PageTree" arguments="{of:child, current:current}"/>
 				</f:for>
 			</li>
 		</ol>
